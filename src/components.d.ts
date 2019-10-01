@@ -15,12 +15,11 @@ export namespace Components {
   interface AppHome {}
   interface AppProfile {}
   interface AppRegistration {}
-  interface AppRoot {
-    'CrudService': any;
-  }
+  interface AppRoot {}
   interface ColorPicker {
     'getSelectedColor': () => Promise<string>;
   }
+  interface CourseInfo {}
   interface MyCourses {}
   interface MyCoursesCard {}
   interface NoCourses {}
@@ -77,6 +76,12 @@ declare global {
     new (): HTMLColorPickerElement;
   };
 
+  interface HTMLCourseInfoElement extends Components.CourseInfo, HTMLStencilElement {}
+  var HTMLCourseInfoElement: {
+    prototype: HTMLCourseInfoElement;
+    new (): HTMLCourseInfoElement;
+  };
+
   interface HTMLMyCoursesElement extends Components.MyCourses, HTMLStencilElement {}
   var HTMLMyCoursesElement: {
     prototype: HTMLMyCoursesElement;
@@ -103,6 +108,7 @@ declare global {
     'app-registration': HTMLAppRegistrationElement;
     'app-root': HTMLAppRootElement;
     'color-picker': HTMLColorPickerElement;
+    'course-info': HTMLCourseInfoElement;
     'my-courses': HTMLMyCoursesElement;
     'my-courses-card': HTMLMyCoursesCardElement;
     'no-courses': HTMLNoCoursesElement;
@@ -116,10 +122,9 @@ declare namespace LocalJSX {
   interface AppHome {}
   interface AppProfile {}
   interface AppRegistration {}
-  interface AppRoot {
-    'CrudService'?: any;
-  }
+  interface AppRoot {}
   interface ColorPicker {}
+  interface CourseInfo {}
   interface MyCourses {}
   interface MyCoursesCard {}
   interface NoCourses {}
@@ -133,6 +138,7 @@ declare namespace LocalJSX {
     'app-registration': AppRegistration;
     'app-root': AppRoot;
     'color-picker': ColorPicker;
+    'course-info': CourseInfo;
     'my-courses': MyCourses;
     'my-courses-card': MyCoursesCard;
     'no-courses': NoCourses;
@@ -153,6 +159,7 @@ declare module "@stencil/core" {
       'app-registration': LocalJSX.AppRegistration & JSXBase.HTMLAttributes<HTMLAppRegistrationElement>;
       'app-root': LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
       'color-picker': LocalJSX.ColorPicker & JSXBase.HTMLAttributes<HTMLColorPickerElement>;
+      'course-info': LocalJSX.CourseInfo & JSXBase.HTMLAttributes<HTMLCourseInfoElement>;
       'my-courses': LocalJSX.MyCourses & JSXBase.HTMLAttributes<HTMLMyCoursesElement>;
       'my-courses-card': LocalJSX.MyCoursesCard & JSXBase.HTMLAttributes<HTMLMyCoursesCardElement>;
       'no-courses': LocalJSX.NoCourses & JSXBase.HTMLAttributes<HTMLNoCoursesElement>;

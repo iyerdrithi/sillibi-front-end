@@ -11,16 +11,16 @@ export class AppFooter {
     return (
       <ion-footer>
         <ion-toolbar color={'indigo'}>
-          <ion-button color={'indigo'} icon-only item-end clear href='/profile' >
+          <ion-button color={'indigo'} icon-only item-end href='/profile' >
           <ion-icon name="contact" size='large'/>
           </ion-button>
-          <ion-button color={'indigo'} icon-only item-end clear href='/mycourses' >
+          <ion-button color={'indigo'} icon-only item-end href='/mycourses' >
           <ion-icon name="document" size='large'/>
           </ion-button>
-            <ion-button color={'indigo'} icon-only item-end clear href='/myassignments' >
+            <ion-button color={'indigo'} icon-only item-end href='/myassignments' >
           <ion-icon name="paper" size='large'/>
             </ion-button>
-          <ion-button color={'indigo'} icon-only item-end clear href='/' >
+          <ion-button color={'indigo'} icon-only item-end href='/' >
           <ion-icon name="more" size='large'/>
           </ion-button>
         </ion-toolbar>

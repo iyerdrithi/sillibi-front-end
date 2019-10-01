@@ -1,9 +1,9 @@
-ion-icon {
+app-footer ion-icon {
   margin-right: 5%;
   margin-left: 5%;
 }
 
-ion-toolbar {
+app-footer ion-toolbar {
   text-align: center;
 }
 

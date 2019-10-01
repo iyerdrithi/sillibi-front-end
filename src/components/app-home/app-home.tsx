@@ -29,7 +29,7 @@ export class AppHome {
           <ion-row align-items-center={true} justify-content-around={true}>
             <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
               <ion-input placeholder={"Email Address"} ref={ (field) => this.email = field as HTMLIonInputElement }/>
-              
+
             </ion-item>
           </ion-row>
           <ion-row align-items-center={true} justify-content-around={true}>

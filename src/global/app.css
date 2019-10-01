@@ -29,3 +29,20 @@
   More info about color theming using Ionic:
   https://ionicframework.com/docs/theming/color-generator
 */
+:root {
+  --ion-color-dark-purple: #5e3594;
+  --ion-color-dark-purple-rgb: 94,53,148;
+  --ion-color-dark-purple-contrast: #ffffff;
+  --ion-color-dark-purple-contrast-rgb: 255,255,255;
+  --ion-color-dark-purple-shade: #532f82;
+  --ion-color-dark-purple-tint: #6e499f;
+}
+
+.ion-color-dark-purple {
+  --ion-color-base: var(--ion-color-dark-purple);
+  --ion-color-base-rgb: var(--ion-color-dark-purple-rgb);
+  --ion-color-contrast: var(--ion-color-dark-purple-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-purple-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-purple-shade);
+  --ion-color-tint: var(--ion-color-dark-purple-tint);
+}

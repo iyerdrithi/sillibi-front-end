@@ -9,15 +9,37 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface AddCourse {}
+  interface AppFooter {}
   interface AppHome {}
   interface AppProfile {
     'name': string;
   }
-  interface AppRoot {}
+  interface AppRoot {
+    'CrudService': any;
+  }
+  interface ColorPicker {
+    'getSelectedColor': () => Promise<string>;
+  }
+  interface MyCourses {}
+  interface MyCoursesCard {}
+  interface NoCourses {}
 }
 
 declare global {
 
+
+  interface HTMLAddCourseElement extends Components.AddCourse, HTMLStencilElement {}
+  var HTMLAddCourseElement: {
+    prototype: HTMLAddCourseElement;
+    new (): HTMLAddCourseElement;
+  };
+
+  interface HTMLAppFooterElement extends Components.AppFooter, HTMLStencilElement {}
+  var HTMLAppFooterElement: {
+    prototype: HTMLAppFooterElement;
+    new (): HTMLAppFooterElement;
+  };
 
   interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {}
   var HTMLAppHomeElement: {
@@ -36,24 +58,68 @@ declare global {
     prototype: HTMLAppRootElement;
     new (): HTMLAppRootElement;
   };
+
+  interface HTMLColorPickerElement extends Components.ColorPicker, HTMLStencilElement {}
+  var HTMLColorPickerElement: {
+    prototype: HTMLColorPickerElement;
+    new (): HTMLColorPickerElement;
+  };
+
+  interface HTMLMyCoursesElement extends Components.MyCourses, HTMLStencilElement {}
+  var HTMLMyCoursesElement: {
+    prototype: HTMLMyCoursesElement;
+    new (): HTMLMyCoursesElement;
+  };
+
+  interface HTMLMyCoursesCardElement extends Components.MyCoursesCard, HTMLStencilElement {}
+  var HTMLMyCoursesCardElement: {
+    prototype: HTMLMyCoursesCardElement;
+    new (): HTMLMyCoursesCardElement;
+  };
+
+  interface HTMLNoCoursesElement extends Components.NoCourses, HTMLStencilElement {}
+  var HTMLNoCoursesElement: {
+    prototype: HTMLNoCoursesElement;
+    new (): HTMLNoCoursesElement;
+  };
   interface HTMLElementTagNameMap {
+    'add-course': HTMLAddCourseElement;
+    'app-footer': HTMLAppFooterElement;
     'app-home': HTMLAppHomeElement;
     'app-profile': HTMLAppProfileElement;
     'app-root': HTMLAppRootElement;
+    'color-picker': HTMLColorPickerElement;
+    'my-courses': HTMLMyCoursesElement;
+    'my-courses-card': HTMLMyCoursesCardElement;
+    'no-courses': HTMLNoCoursesElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface AddCourse {}
+  interface AppFooter {}
   interface AppHome {}
   interface AppProfile {
     'name'?: string;
   }
-  interface AppRoot {}
+  interface AppRoot {
+    'CrudService'?: any;
+  }
+  interface ColorPicker {}
+  interface MyCourses {}
+  interface MyCoursesCard {}
+  interface NoCourses {}
 
   interface IntrinsicElements {
+    'add-course': AddCourse;
+    'app-footer': AppFooter;
     'app-home': AppHome;
     'app-profile': AppProfile;
     'app-root': AppRoot;
+    'color-picker': ColorPicker;
+    'my-courses': MyCourses;
+    'my-courses-card': MyCoursesCard;
+    'no-courses': NoCourses;
   }
 }
 
@@ -63,9 +129,15 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'add-course': LocalJSX.AddCourse & JSXBase.HTMLAttributes<HTMLAddCourseElement>;
+      'app-footer': LocalJSX.AppFooter & JSXBase.HTMLAttributes<HTMLAppFooterElement>;
       'app-home': LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
       'app-profile': LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
       'app-root': LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+      'color-picker': LocalJSX.ColorPicker & JSXBase.HTMLAttributes<HTMLColorPickerElement>;
+      'my-courses': LocalJSX.MyCourses & JSXBase.HTMLAttributes<HTMLMyCoursesElement>;
+      'my-courses-card': LocalJSX.MyCoursesCard & JSXBase.HTMLAttributes<HTMLMyCoursesCardElement>;
+      'no-courses': LocalJSX.NoCourses & JSXBase.HTMLAttributes<HTMLNoCoursesElement>;
     }
   }
 }

@@ -21,6 +21,8 @@ export class AppRoot {
           <ion-route url="/colorpicker" component="color-picker" />
           <ion-route url="/addcourse" component="add-course" />
           <ion-route url="/mycourses" component="my-courses" />
+          <ion-route url="/assignments" component="app-assignments" />
+          <ion-route url="/addassignments" component="app-addassignments" />
           <ion-route url="/courseinfo" component="course-info" />
           <ion-route url="/registration" component="app-registration" />
         </ion-router>

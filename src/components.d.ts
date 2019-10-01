@@ -10,11 +10,11 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface AddCourse {}
+  interface AppEditProfile {}
   interface AppFooter {}
   interface AppHome {}
-  interface AppProfile {
-    'name': string;
-  }
+  interface AppProfile {}
+  interface AppRegistration {}
   interface AppRoot {
     'CrudService': any;
   }
@@ -35,6 +35,12 @@ declare global {
     new (): HTMLAddCourseElement;
   };
 
+  interface HTMLAppEditProfileElement extends Components.AppEditProfile, HTMLStencilElement {}
+  var HTMLAppEditProfileElement: {
+    prototype: HTMLAppEditProfileElement;
+    new (): HTMLAppEditProfileElement;
+  };
+
   interface HTMLAppFooterElement extends Components.AppFooter, HTMLStencilElement {}
   var HTMLAppFooterElement: {
     prototype: HTMLAppFooterElement;
@@ -51,6 +57,12 @@ declare global {
   var HTMLAppProfileElement: {
     prototype: HTMLAppProfileElement;
     new (): HTMLAppProfileElement;
+  };
+
+  interface HTMLAppRegistrationElement extends Components.AppRegistration, HTMLStencilElement {}
+  var HTMLAppRegistrationElement: {
+    prototype: HTMLAppRegistrationElement;
+    new (): HTMLAppRegistrationElement;
   };
 
   interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
@@ -84,9 +96,11 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'add-course': HTMLAddCourseElement;
+    'app-edit-profile': HTMLAppEditProfileElement;
     'app-footer': HTMLAppFooterElement;
     'app-home': HTMLAppHomeElement;
     'app-profile': HTMLAppProfileElement;
+    'app-registration': HTMLAppRegistrationElement;
     'app-root': HTMLAppRootElement;
     'color-picker': HTMLColorPickerElement;
     'my-courses': HTMLMyCoursesElement;
@@ -97,11 +111,11 @@ declare global {
 
 declare namespace LocalJSX {
   interface AddCourse {}
+  interface AppEditProfile {}
   interface AppFooter {}
   interface AppHome {}
-  interface AppProfile {
-    'name'?: string;
-  }
+  interface AppProfile {}
+  interface AppRegistration {}
   interface AppRoot {
     'CrudService'?: any;
   }
@@ -112,9 +126,11 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'add-course': AddCourse;
+    'app-edit-profile': AppEditProfile;
     'app-footer': AppFooter;
     'app-home': AppHome;
     'app-profile': AppProfile;
+    'app-registration': AppRegistration;
     'app-root': AppRoot;
     'color-picker': ColorPicker;
     'my-courses': MyCourses;
@@ -130,9 +146,11 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'add-course': LocalJSX.AddCourse & JSXBase.HTMLAttributes<HTMLAddCourseElement>;
+      'app-edit-profile': LocalJSX.AppEditProfile & JSXBase.HTMLAttributes<HTMLAppEditProfileElement>;
       'app-footer': LocalJSX.AppFooter & JSXBase.HTMLAttributes<HTMLAppFooterElement>;
       'app-home': LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
       'app-profile': LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
+      'app-registration': LocalJSX.AppRegistration & JSXBase.HTMLAttributes<HTMLAppRegistrationElement>;
       'app-root': LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
       'color-picker': LocalJSX.ColorPicker & JSXBase.HTMLAttributes<HTMLColorPickerElement>;
       'my-courses': LocalJSX.MyCourses & JSXBase.HTMLAttributes<HTMLMyCoursesElement>;

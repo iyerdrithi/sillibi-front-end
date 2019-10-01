@@ -10,16 +10,13 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface AddCourse {}
-  interface AppEditProfile {}
   interface AppFooter {}
   interface AppHome {}
   interface AppProfile {}
-  interface AppRegistration {}
   interface AppRoot {}
   interface ColorPicker {
     'getSelectedColor': () => Promise<string>;
   }
-  interface CourseInfo {}
   interface MyCourses {}
   interface MyCoursesCard {}
   interface NoCourses {}
@@ -32,12 +29,6 @@ declare global {
   var HTMLAddCourseElement: {
     prototype: HTMLAddCourseElement;
     new (): HTMLAddCourseElement;
-  };
-
-  interface HTMLAppEditProfileElement extends Components.AppEditProfile, HTMLStencilElement {}
-  var HTMLAppEditProfileElement: {
-    prototype: HTMLAppEditProfileElement;
-    new (): HTMLAppEditProfileElement;
   };
 
   interface HTMLAppFooterElement extends Components.AppFooter, HTMLStencilElement {}
@@ -58,12 +49,6 @@ declare global {
     new (): HTMLAppProfileElement;
   };
 
-  interface HTMLAppRegistrationElement extends Components.AppRegistration, HTMLStencilElement {}
-  var HTMLAppRegistrationElement: {
-    prototype: HTMLAppRegistrationElement;
-    new (): HTMLAppRegistrationElement;
-  };
-
   interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
   var HTMLAppRootElement: {
     prototype: HTMLAppRootElement;
@@ -74,12 +59,6 @@ declare global {
   var HTMLColorPickerElement: {
     prototype: HTMLColorPickerElement;
     new (): HTMLColorPickerElement;
-  };
-
-  interface HTMLCourseInfoElement extends Components.CourseInfo, HTMLStencilElement {}
-  var HTMLCourseInfoElement: {
-    prototype: HTMLCourseInfoElement;
-    new (): HTMLCourseInfoElement;
   };
 
   interface HTMLMyCoursesElement extends Components.MyCourses, HTMLStencilElement {}
@@ -101,14 +80,11 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'add-course': HTMLAddCourseElement;
-    'app-edit-profile': HTMLAppEditProfileElement;
     'app-footer': HTMLAppFooterElement;
     'app-home': HTMLAppHomeElement;
     'app-profile': HTMLAppProfileElement;
-    'app-registration': HTMLAppRegistrationElement;
     'app-root': HTMLAppRootElement;
     'color-picker': HTMLColorPickerElement;
-    'course-info': HTMLCourseInfoElement;
     'my-courses': HTMLMyCoursesElement;
     'my-courses-card': HTMLMyCoursesCardElement;
     'no-courses': HTMLNoCoursesElement;
@@ -117,28 +93,22 @@ declare global {
 
 declare namespace LocalJSX {
   interface AddCourse {}
-  interface AppEditProfile {}
   interface AppFooter {}
   interface AppHome {}
   interface AppProfile {}
-  interface AppRegistration {}
   interface AppRoot {}
   interface ColorPicker {}
-  interface CourseInfo {}
   interface MyCourses {}
   interface MyCoursesCard {}
   interface NoCourses {}
 
   interface IntrinsicElements {
     'add-course': AddCourse;
-    'app-edit-profile': AppEditProfile;
     'app-footer': AppFooter;
     'app-home': AppHome;
     'app-profile': AppProfile;
-    'app-registration': AppRegistration;
     'app-root': AppRoot;
     'color-picker': ColorPicker;
-    'course-info': CourseInfo;
     'my-courses': MyCourses;
     'my-courses-card': MyCoursesCard;
     'no-courses': NoCourses;
@@ -152,14 +122,11 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'add-course': LocalJSX.AddCourse & JSXBase.HTMLAttributes<HTMLAddCourseElement>;
-      'app-edit-profile': LocalJSX.AppEditProfile & JSXBase.HTMLAttributes<HTMLAppEditProfileElement>;
       'app-footer': LocalJSX.AppFooter & JSXBase.HTMLAttributes<HTMLAppFooterElement>;
       'app-home': LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
       'app-profile': LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
-      'app-registration': LocalJSX.AppRegistration & JSXBase.HTMLAttributes<HTMLAppRegistrationElement>;
       'app-root': LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
       'color-picker': LocalJSX.ColorPicker & JSXBase.HTMLAttributes<HTMLColorPickerElement>;
-      'course-info': LocalJSX.CourseInfo & JSXBase.HTMLAttributes<HTMLCourseInfoElement>;
       'my-courses': LocalJSX.MyCourses & JSXBase.HTMLAttributes<HTMLMyCoursesElement>;
       'my-courses-card': LocalJSX.MyCoursesCard & JSXBase.HTMLAttributes<HTMLMyCoursesCardElement>;
       'no-courses': LocalJSX.NoCourses & JSXBase.HTMLAttributes<HTMLNoCoursesElement>;

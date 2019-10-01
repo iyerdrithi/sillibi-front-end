@@ -30,20 +30,19 @@
   https://ionicframework.com/docs/theming/color-generator
 */
 :root {
-  --ion-color-indigo: #4b0082;
-  --ion-color-indigo-rgb: 75,0,130;
-  --ion-color-indigo-contrast: #ffffff;
-  --ion-color-indigo-contrast-rgb: 255,255,255;
-  --ion-color-indigo-shade: #420072;
-  --ion-color-indigo-tint: #5d1a8f;
-
+<<<<<<< src/global/app.css
+  --ion-color-dark-purple: #5e3594;
+  --ion-color-dark-purple-rgb: 94,53,148;
+  --ion-color-dark-purple-contrast: #ffffff;
+  --ion-color-dark-purple-contrast-rgb: 255,255,255;
+  --ion-color-dark-purple-shade: #532f82;
+  --ion-color-dark-purple-tint: #6e499f;
   --ion-color-primary: #7044ff;
   --ion-color-primary-rgb: 112,68,255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255,255,255;
   --ion-color-primary-shade: #633ce0;
   --ion-color-primary-tint: #7e57ff;
-
   --ion-color-facebook: #3b5998;
   --ion-color-facebook-rgb: 59,89,152;
   --ion-color-facebook-contrast: #ffffff;
@@ -52,13 +51,13 @@
   --ion-color-facebook-tint: #4f6aa2;
 }
 
-.ion-color-indigo {
-  --ion-color-base: var(--ion-color-indigo);
-  --ion-color-base-rgb: var(--ion-color-indigo-rgb);
-  --ion-color-contrast: var(--ion-color-indigo-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-indigo-contrast-rgb);
-  --ion-color-shade: var(--ion-color-indigo-shade);
-  --ion-color-tint: var(--ion-color-indigo-tint);
+.ion-color-dark-purple {
+  --ion-color-base: var(--ion-color-dark-purple);
+  --ion-color-base-rgb: var(--ion-color-dark-purple-rgb);
+  --ion-color-contrast: var(--ion-color-dark-purple-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-purple-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-purple-shade);
+  --ion-color-tint: var(--ion-color-dark-purple-tint);
 }
 
 .ion-color-primary {

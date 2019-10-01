@@ -29,3 +29,52 @@
   More info about color theming using Ionic:
   https://ionicframework.com/docs/theming/color-generator
 */
+:root {
+  --ion-color-indigo: #4b0082;
+  --ion-color-indigo-rgb: 75,0,130;
+  --ion-color-indigo-contrast: #ffffff;
+  --ion-color-indigo-contrast-rgb: 255,255,255;
+  --ion-color-indigo-shade: #420072;
+  --ion-color-indigo-tint: #5d1a8f;
+
+  --ion-color-primary: #7044ff;
+  --ion-color-primary-rgb: 112,68,255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #633ce0;
+  --ion-color-primary-tint: #7e57ff;
+
+  --ion-color-facebook: #3b5998;
+  --ion-color-facebook-rgb: 59,89,152;
+  --ion-color-facebook-contrast: #ffffff;
+  --ion-color-facebook-contrast-rgb: 255,255,255;
+  --ion-color-facebook-shade: #344e86;
+  --ion-color-facebook-tint: #4f6aa2;
+}
+
+.ion-color-indigo {
+  --ion-color-base: var(--ion-color-indigo);
+  --ion-color-base-rgb: var(--ion-color-indigo-rgb);
+  --ion-color-contrast: var(--ion-color-indigo-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-indigo-contrast-rgb);
+  --ion-color-shade: var(--ion-color-indigo-shade);
+  --ion-color-tint: var(--ion-color-indigo-tint);
+}
+
+.ion-color-primary {
+  --ion-color-base: var(--ion-color-primary);
+  --ion-color-base-rgb: var(--ion-color-primary-rgb);
+  --ion-color-contrast: var(--ion-color-primary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-primary-shade);
+  --ion-color-tint: var(--ion-color-primary-tint);
+}
+
+.ion-color-facebook {
+  --ion-color-base: var(--ion-color-facebook);
+  --ion-color-base-rgb: var(--ion-color-facebook-rgb);
+  --ion-color-contrast: var(--ion-color-facebook-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-facebook-contrast-rgb);
+  --ion-color-shade: var(--ion-color-facebook-shade);
+  --ion-color-tint: var(--ion-color-facebook-tint);
+}

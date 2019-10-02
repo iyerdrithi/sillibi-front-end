@@ -1,39 +1,36 @@
-import {Component, h, State} from '@stencil/core';
-import {RouteService} from "../../services/route.service";
+import {Component, h} from '@stencil/core';
 import {AppRoot} from "../app-root/app-root";
+import {UserHttpService} from "../../http_services/user.service";
+import {SessionService} from "../../services/session.service";
 
 @Component({
   tag: 'app-edit-profile',
   styleUrl: 'app-edit-profile.css'
 })
 export class AppEditProfile {
-  address = `http://localhost:3000/users/${RouteService.params().user_id}`;
   user: { first_name:string, last_name:string, email:string, call: boolean, text: boolean};
   first: HTMLIonInputElement;
   last: HTMLIonInputElement;
   email: HTMLIonInputElement;
-  @State() call = true;
-  @State() text = true;
+  call = true;
+  text = true;
   async componentWillLoad() {
-    const token = JSON.parse(localStorage.getItem('token'))['access_token'];
-    const response = await fetch(`http://localhost:3000/users/${RouteService.params().user_id}`, {
-      headers: {Authorization: `Bearer ${token}`}
-    });
-    this.user = await response.json();
+    this.user = await new UserHttpService().find(SessionService.get().user_id);
     this.user.first_name = this.user.first_name || "";
     this.user.last_name = this.user.last_name || "";
     this.user.email = this.user.email || "";
-    this.user.call = this.user.call || true;
-    this.user.text = this.user.text || true;
+    this.call = this.user.call;
+    this.text = this.user.text;
   }
   async postProfile() {
-    const token = JSON.parse(localStorage.getItem('token'))['access_token'];
-    const response = await fetch(this.address, {
-      method: 'PUT',
-      headers: {Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/json'},
-      body: JSON.stringify({'email':this.email.value, 'first_name':this.first.value, 'last_name':this.last.value, 'call':this.call, 'text':this.text})
+    const edit = await new UserHttpService().put({
+      'id':SessionService.get().user_id,
+      'email':this.email.value,
+      'first_name':this.first.value,
+      'last_name':this.last.value,
+      'call':this.call,
+      'text':this.text
     });
-    const edit = await response.json();
     console.log(edit);
     await AppRoot.route('profile/');
   }
@@ -79,13 +76,13 @@ export class AppEditProfile {
             <ion-row>
               <ion-item style={{width:"100vw", marginLeft:"-4vw"}}>
                 <ion-label>Call</ion-label>
-                <ion-toggle slot={"end"} name={"call"} color={"success"} checked={this.call} onIonChange={ev => (this.call = ev.detail.checked)}/>
+                <ion-toggle slot={"end"} name={"call"} color={"success"} checked={this.user.call} onIonChange={ev => (this.call = ev.detail.checked)}/>
               </ion-item>
             </ion-row>
             <ion-row>
               <ion-item style={{width:"100vw", marginLeft:"-4vw"}}>
                 <ion-label>Text</ion-label>
-                <ion-toggle slot={"end"} name={"text"} color={"success"} checked={this.text} onIonChange={ev => (this.text = ev.detail.checked)}/>
+                <ion-toggle slot={"end"} name={"text"} color={"success"} checked={this.user.text} onIonChange={ev => (this.text = ev.detail.checked)}/>
               </ion-item>
             </ion-row>
             <ion-row>
@@ -96,27 +93,7 @@ export class AppEditProfile {
           </ion-grid>
         </ion-card>
       </ion-content>,
-
-      <ion-footer>
-        <ion-toolbar color={"dark-purple"} justify-content-around>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"warning"} name="contact" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="copy" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="paper" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="more" size={"large"}/></ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-toolbar>
-      </ion-footer>
+      <app-footer/>
     ];
   }
 }

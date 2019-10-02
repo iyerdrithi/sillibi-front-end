@@ -1,5 +1,6 @@
-import { Component, h} from '@stencil/core';
-// import { UserHttpService } from "../../http_services/user.service";
+import {Component, h} from '@stencil/core';
+import {SessionService} from "../../services/session.service";
+import {UserHttpService} from "../../http_services/user.service";
 import {AppRoot} from "../app-root/app-root";
 
 @Component({
@@ -17,13 +18,16 @@ export class AppHome {
     form_data.append("email", this.email.value);
     form_data.append("password", this.password.value);
     form_data.append("grant_type", "password");
+
     const response = await fetch(this.address, {
       method: 'POST',
       body: form_data
     });
-    const objects = await response.json();
-    localStorage.setItem("token", JSON.stringify(objects));
-    console.log(objects);
+    const token = await response.json();
+    localStorage.setItem("token", JSON.stringify(token));
+    SessionService.set({token: token.access_token});
+    const objects = await new UserHttpService().query({});
+    SessionService.set({token: token.access_token, user_id: objects[0].id});
     await AppRoot.route('profile/');
   }
 

@@ -1,4 +1,5 @@
 import { Component, h } from '@stencil/core';
+import {UserHttpService} from "../../http_services/user.service";
 
 @Component({
   tag: 'app-profile',
@@ -13,18 +14,14 @@ export class AppProfile {
   text:boolean;
 
   async componentWillLoad() {
-    const token = JSON.parse(localStorage.getItem('token'))['access_token'];
-    const response = await fetch('http://localhost:3000/users', {
-      headers: {Authorization: `Bearer ${token}`}
-    });
-    const objects = await response.json();
+    const objects = await new UserHttpService().query({});
     console.log(objects);
     this.first_name = objects[0].first_name ? objects[0].first_name : "Please update first name";
     this.last_name = objects[0].last_name ? objects[0].last_name : "Please update last name";
     this.email = objects[0].email ? objects[0].email : "Please update email";
     this.id = objects[0].id ? objects[0].id : "N/A";
-    this.call = objects[0].call ? objects[0].call : true;
-    this.text = objects[0].text ? objects[0].text : true;
+    this.call = objects[0].call !== null ? objects[0].call : true;
+    this.text = objects[0].text !== null ? objects[0].text : true;
   }
 
   toggleIcon(value, name) {
@@ -36,7 +33,7 @@ export class AppProfile {
       <ion-header>
         <ion-toolbar color="light">
           <ion-buttons slot="end">
-            <ion-button href={`#/edit_profile/?user_id=${this.id}`}>
+            <ion-button href={`#/edit_profile`}>
               <ion-label color={"primary"}>Edit</ion-label>
             </ion-button>
           </ion-buttons>
@@ -78,27 +75,7 @@ export class AppProfile {
           </ion-grid>
         </ion-card>
       </ion-content>,
-
-      <ion-footer>
-        <ion-toolbar color={"dark-purple"} justify-content-around>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"warning"} name="contact" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="copy"size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="paper" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="more" size={"large"}/></ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-toolbar>
-      </ion-footer>
+      <app-footer/>
     ];
   }
 }

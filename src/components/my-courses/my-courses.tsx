@@ -1,16 +1,18 @@
 import {Component, h} from '@stencil/core';
+import {CourseHttpService} from "../../http_services/course.service";
+import {SessionService} from "../../services/session.service";
 
 @Component({
   tag: 'my-courses',
   styleUrl: 'my-courses.css'
 })
 export class MyCourses {
-  courseEndPoint = 'http://localhost:3000/courses';
   courses: any[];
 
   async componentWillLoad() {
-    const res = await fetch(this.courseEndPoint);
-    this.courses = await res.json()
+    this.courses = await new CourseHttpService().query({
+      user_id: SessionService.get().user_id
+    })
   }
 
   emptyCoursesOrNah() {

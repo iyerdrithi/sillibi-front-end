@@ -1,5 +1,7 @@
 import { Component, h, State } from '@stencil/core';
 import {AppRoot} from "../app-root/app-root";
+import {CourseHttpService} from "../../http_services/course.service";
+import {SessionService} from "../../services/session.service";
 
 @Component({
   tag: 'add-course',
@@ -21,16 +23,10 @@ export class AddCourse {
   }
 
   async postCourseInfo() {
-    const res = await fetch('http://localhost:3000/courses', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(this.course)
+    return await new CourseHttpService().post({
+      ...this.course,
+      user_id: SessionService.get().user_id
     });
-    const courseData = await res.json();
-    return courseData
   }
 
   render() {

@@ -1,18 +1,18 @@
 import { Component, h } from '@stencil/core';
 import {RouteService} from "../../services/route.service";
+import {AssignmentHttpService} from "../../http_services/assignment.service";
 
 @Component({
   tag: 'app-addassignments',
   styleUrl: 'app-addassignments.css'
 })
 export class AppAddAssignments {
-  // courseEndPoint = 'http://localhost:3000/assignments';
   name: HTMLIonInputElement;
   date: HTMLIonDatetimeElement;
   description: HTMLIonTextareaElement;
   points: HTMLIonInputElement;
 
-  getAssignmentinput() {
+  async getAssignmentinput() {
     let assignmentinfo = {
       "name": this.name.value,
       "date": this.date.value,
@@ -20,20 +20,12 @@ export class AppAddAssignments {
       "points": this.points.value,
       "course_id": RouteService.params().course_id,
     };
-    this.postAssignmentinfo(assignmentinfo)
+    await this.postAssignmentinfo(assignmentinfo)
   }
 
-  postAssignmentinfo(assignmentinfo) {
-    fetch(`http://localhost:3000/assignments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(assignmentinfo)
-    })
-      .then(response => response.json())
-      .then(json => console.log(json))
+  async postAssignmentinfo(assignmentinfo) {
+    const response = await new AssignmentHttpService().post(assignmentinfo);
+    console.log(response);
   }
 
   render() {

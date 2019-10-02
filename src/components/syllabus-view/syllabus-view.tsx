@@ -7,15 +7,30 @@ import {RouteService} from "../../services/route.service";
   styleUrl: 'syllabus-view.css'
 })
 export class SyllabusView {
-  @State() syllabus: any;
+  @State() syllabuses: any[];
   params: any;
+
   async componentWillLoad() {
     this.params = RouteService.params();
-    await this.getBase64()
+
+    if(this.params.id) {
+      const syllabus = await new SyllabusHttpService().find_by({id: this.params.id});
+      this.syllabuses = [syllabus];
+    } else if(this.params.course_id) {
+      this.syllabuses = await new SyllabusHttpService().query({
+        course_id: this.params.course_id
+      });
+    }
   }
 
-  async getBase64() {
-    this.syllabus = await new SyllabusHttpService().find_by({id: this.params.id})
+  renderSyllabuses() {
+    return this.syllabuses.map((syllabus) => {
+      return (
+        <ion-card class='ion-padding' style={{height: '100%'}}>
+          <iframe style={{width: '100%', height: '100%'}} src={syllabus.base64}/>
+        </ion-card>
+      )
+    })
   }
 
   render() {
@@ -29,9 +44,7 @@ export class SyllabusView {
         </ion-toolbar>
       </ion-header>,
       <ion-content fullscreen>
-        <ion-card class='ion-padding' style={{height: '100%'}}>
-      <iframe style={{width: '100%', height: '100%'}} src = {this.syllabus.base64}> </iframe>
-        </ion-card>
+        {this.renderSyllabuses()}
       </ion-content>
     ];
   }

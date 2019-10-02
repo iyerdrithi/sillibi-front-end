@@ -14,7 +14,7 @@ export class CrudHttpService {
 
   headers(): any {
     const token = SessionService.get().token;
-    return {Authorization: `Token token=${token}`, 'Session-Id': token};
+    return {Authorization: `Bearer ${token}`};
   }
 
   async query(params: any, cache: boolean = false) {

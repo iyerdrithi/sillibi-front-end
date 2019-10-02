@@ -4,8 +4,4 @@ export class SyllabusHttpService extends CrudHttpService {
   constructor() {
     super('syllabuses');
   }
-
-  headers() {
-    return {};
-  }
 }

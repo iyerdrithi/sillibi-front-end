@@ -56,8 +56,8 @@ export class MyCoursesCard {
                     <ion-icon size='large' slot={'start'} name={'paper'} style={{color: 'skyblue'}}/>
                     <ion-label style={{paddingLeft: '1rem'}}>Assignments</ion-label>
                     <ion-label style={{flex: 'none'}} slot={'end'}>0</ion-label>
-                    <ion-button size='large' slot='end' color={'transparent'} icon-only item-end clear
-                                href={`#/addassignment/${course.id}`}>
+                    <ion-button size='large' slot='end' color={'transparent'} icon-only item-end
+                                href={`/addassignments/?course_id=${course.id}`}>
                       <ion-icon style={{color: 'skyblue'}} slot='end' name="add-circle"/>
                     </ion-button>
                   </ion-item>

@@ -13,8 +13,8 @@ export class CourseInfo {
 
   params: any;
   colorPicker: HTMLColorPickerElement;
-  course_name: HTMLIonInputElement;
-  course_number: HTMLIonInputElement;
+  name: HTMLIonInputElement;
+  number: HTMLIonInputElement;
   section: HTMLIonInputElement;
   term: HTMLIonInputElement;
   instructor: HTMLIonInputElement;
@@ -29,8 +29,8 @@ export class CourseInfo {
   getCourseInputs() {
     const values = {
       'id': this.params.course_id,
-      'course_name': this.course_name.value,
-      'course_number': this.course_number.value,
+      'name': this.name.value,
+      'number': this.number.value,
       'section': this.section.value,
       'term': this.term.value,
       'instructor': this.instructor.value
@@ -81,18 +81,18 @@ export class CourseInfo {
             <ion-list lines="none">
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Course Name</ion-label>
-                <ion-input ref={(el) => this.course_name = el as HTMLIonInputElement}
+                <ion-input ref={(el) => this.name = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.course_name : null}
-                           value={this.editing ? null : this.course.course_name}
+                           placeholder={this.editing ? this.course.name : null}
+                           value={this.editing ? null : this.course.name}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Course Number</ion-label>
-                <ion-input ref={(el) => this.course_number = el as HTMLIonInputElement}
+                <ion-input ref={(el) => this.number = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.course_number : null}
-                           value={this.editing ? null : this.course.course_number}
+                           placeholder={this.editing ? this.course.number : null}
+                           value={this.editing ? null : this.course.number}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>

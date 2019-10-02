@@ -12,13 +12,15 @@ export class AppEditProfile {
   first: HTMLIonInputElement;
   last: HTMLIonInputElement;
   email: HTMLIonInputElement;
-  call: boolean;
-  text: boolean;
+  call = true;
+  text = true;
   async componentWillLoad() {
     this.user = await new UserHttpService().find(SessionService.get().user_id);
     this.user.first_name = this.user.first_name || "";
     this.user.last_name = this.user.last_name || "";
     this.user.email = this.user.email || "";
+    this.call = this.user.call;
+    this.text = this.user.text;
   }
   async postProfile() {
     const edit = await new UserHttpService().put({

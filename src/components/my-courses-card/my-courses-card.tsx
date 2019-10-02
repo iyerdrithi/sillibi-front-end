@@ -1,7 +1,6 @@
 import {Component, h} from '@stencil/core';
 import {SessionService} from "../../services/session.service";
 import {CourseHttpService} from "../../http_services/course.service";
-import {Component, h, State} from '@stencil/core';
 
 @Component({
   tag: 'my-courses-card',

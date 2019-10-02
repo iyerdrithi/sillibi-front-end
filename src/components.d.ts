@@ -26,6 +26,8 @@ export namespace Components {
   interface MyCourses {}
   interface MyCoursesCard {}
   interface NoCourses {}
+  interface SyllabusUpload {}
+  interface SyllabusView {}
 }
 
 declare global {
@@ -120,6 +122,18 @@ declare global {
     prototype: HTMLNoCoursesElement;
     new (): HTMLNoCoursesElement;
   };
+
+  interface HTMLSyllabusUploadElement extends Components.SyllabusUpload, HTMLStencilElement {}
+  var HTMLSyllabusUploadElement: {
+    prototype: HTMLSyllabusUploadElement;
+    new (): HTMLSyllabusUploadElement;
+  };
+
+  interface HTMLSyllabusViewElement extends Components.SyllabusView, HTMLStencilElement {}
+  var HTMLSyllabusViewElement: {
+    prototype: HTMLSyllabusViewElement;
+    new (): HTMLSyllabusViewElement;
+  };
   interface HTMLElementTagNameMap {
     'add-course': HTMLAddCourseElement;
     'app-addassignments': HTMLAppAddassignmentsElement;
@@ -136,6 +150,8 @@ declare global {
     'my-courses': HTMLMyCoursesElement;
     'my-courses-card': HTMLMyCoursesCardElement;
     'no-courses': HTMLNoCoursesElement;
+    'syllabus-upload': HTMLSyllabusUploadElement;
+    'syllabus-view': HTMLSyllabusViewElement;
   }
 }
 
@@ -155,6 +171,8 @@ declare namespace LocalJSX {
   interface MyCourses {}
   interface MyCoursesCard {}
   interface NoCourses {}
+  interface SyllabusUpload {}
+  interface SyllabusView {}
 
   interface IntrinsicElements {
     'add-course': AddCourse;
@@ -172,6 +190,8 @@ declare namespace LocalJSX {
     'my-courses': MyCourses;
     'my-courses-card': MyCoursesCard;
     'no-courses': NoCourses;
+    'syllabus-upload': SyllabusUpload;
+    'syllabus-view': SyllabusView;
   }
 }
 
@@ -196,6 +216,8 @@ declare module "@stencil/core" {
       'my-courses': LocalJSX.MyCourses & JSXBase.HTMLAttributes<HTMLMyCoursesElement>;
       'my-courses-card': LocalJSX.MyCoursesCard & JSXBase.HTMLAttributes<HTMLMyCoursesCardElement>;
       'no-courses': LocalJSX.NoCourses & JSXBase.HTMLAttributes<HTMLNoCoursesElement>;
+      'syllabus-upload': LocalJSX.SyllabusUpload & JSXBase.HTMLAttributes<HTMLSyllabusUploadElement>;
+      'syllabus-view': LocalJSX.SyllabusView & JSXBase.HTMLAttributes<HTMLSyllabusViewElement>;
     }
   }
 }

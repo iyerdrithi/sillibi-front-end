@@ -40,7 +40,7 @@ export class MyCoursesCard {
                     <ion-icon size='large' slot={'start'} name={'document'} style={{color: 'skyblue'}}/>
                     <ion-label style={{paddingLeft: '1rem'}}>Syllabus</ion-label>
                     <ion-label style={{flex: 'none'}} slot={'end'}>0</ion-label>
-                    <ion-button size='large' slot='end' color={'transparent'} icon-only item-end clear
+                    <ion-button size='large' slot='end' color={'transparent'} icon-only item-end
                                 href={`#/syllabusupload/?course_id=${course.id}`}>
                       <ion-icon style={{color: 'skyblue'}} name="add-circle"/>
                     </ion-button>

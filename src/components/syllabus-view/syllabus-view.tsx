@@ -14,20 +14,25 @@ export class SyllabusView {
     await this.getBase64()
   }
 
-
   async getBase64() {
     this.syllabus = await new SyllabusHttpService().find_by({id: this.params.id})
   }
 
-
   render() {
     return [
+      <ion-header>
+        <ion-toolbar style={{marginBottom:'2rem'}}>
+          <ion-buttons slot={'start'}>
+            <ion-back-button defaultHref={'mycourses'}/>
+          </ion-buttons>
+          <ion-title>Syllabus</ion-title>
+        </ion-toolbar>
+      </ion-header>,
       <ion-content fullscreen>
         <ion-card class='ion-padding' style={{height: '100%'}}>
       <iframe style={{width: '100%', height: '100%'}} src = {this.syllabus.base64}> </iframe>
         </ion-card>
       </ion-content>
-
     ];
   }
 }

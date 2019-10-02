@@ -121,10 +121,14 @@ export class CourseInfo {
               </ion-item>
               {!this.editing ? [
                 <ion-item-divider/>,
-                <ion-item lines={'full'}>
+                <ion-item lines={'full'} button href={
+                            this.course.syllabuses_count > 0
+                              ? `/syllabusview/?course_id=${this.course.id}`
+                              : null
+                          }>
                   <ion-icon slot={'start'} name={'document'} style={{color: 'skyblue'}}/>
                   <ion-label>Syllabus uploads</ion-label>
-                  <ion-note slot={'end'}>0</ion-note>
+                  <ion-note slot={'end'}>{this.course.syllabuses_count}</ion-note>
                 </ion-item>,
                 <ion-item lines={'full'}>
                   <ion-icon slot={'start'} name={'paper'} style={{color: 'skyblue'}}/>

@@ -1,6 +1,7 @@
 import { Component, h, State } from '@stencil/core';
 import {SyllabusHttpService} from "../../http_services/syllabus.service";
 import {RouteService} from "../../services/route.service";
+import {AppRoot} from "../app-root/app-root";
 
 @Component({
   tag: 'syllabus-view',
@@ -23,10 +24,28 @@ export class SyllabusView {
     }
   }
 
+  async componentDidRender() {
+    if(this.syllabuses.length === 0) {
+      await AppRoot.route(this.params.course_id
+        ? `/courseinfo/?course_id=${this.params.course_id}`
+        : `/mycourses`
+      );
+    }
+  }
+
+  async deleteSyllabus(id) {
+    await new SyllabusHttpService().delete({id});
+    this.syllabuses = [...this.syllabuses]
+      .filter((syllabus) => syllabus.id !== id);
+  }
+
   renderSyllabuses() {
     return this.syllabuses.map((syllabus) => {
       return (
         <ion-card class='ion-padding' style={{height: '100%'}}>
+          <ion-button fill="clear" color="danger" onClick={() => this.deleteSyllabus(syllabus.id)}>
+            Delete Syllabus
+          </ion-button>
           <iframe style={{width: '100%', height: '100%'}} src={syllabus.base64}/>
         </ion-card>
       )

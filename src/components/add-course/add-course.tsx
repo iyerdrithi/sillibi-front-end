@@ -1,5 +1,5 @@
-import { Component, h } from '@stencil/core';
-import { AppRoot } from '../app-root/app-root';
+import { Component, h, State } from '@stencil/core';
+import {AppRoot} from "../app-root/app-root";
 
 @Component({
   tag: 'add-course',
@@ -7,39 +7,30 @@ import { AppRoot } from '../app-root/app-root';
 })
 export class AddCourse {
   colorPicker: HTMLColorPickerElement;
-  courseEndPoint = 'http://localhost:3000/courses';
-  course_name: HTMLIonInputElement;
-  course_number: HTMLIonInputElement;
-  section: HTMLIonInputElement;
-  term: HTMLIonInputElement;
-  instructor: HTMLIonInputElement;
+  @State() course: any = {};
 
   async getAddCourseInfo() {
-    let courseInput = {
-      // 'user_id': localStorage.getItem('user_id'),
-      'course_name': this.course_name.value,
-      'course_number': this.course_number.value,
-      'section': this.section.value,
-      'term': this.term.value,
-      'instructor': this.instructor.value,
-      'color': await this.colorPicker.getSelectedColor()
-    };
-    this.postCourseInfo(courseInput)
+    this.course.color = await this.colorPicker.getSelectedColor();
+    const course = await this.postCourseInfo();
+    this.course = {...course};
+    AppRoot.getRouter().push('mycourses', 'root')
   }
 
-  async postCourseInfo(courseInput) {
-    const res = await fetch(this.courseEndPoint, {
+  update(event) {
+    this.course[event.target.name] = event.target.value;
+  }
+
+  async postCourseInfo() {
+    const res = await fetch('http://localhost:3000/courses', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify(courseInput)
+      body: JSON.stringify(this.course)
     });
-    const json = await res.json();
-    console.log(json);
-    AppRoot.getRouter().push('mycourses', 'root')
-
+    const courseData = await res.json();
+    return courseData
   }
 
   render() {
@@ -62,33 +53,35 @@ export class AddCourse {
             <ion-label>Course Name</ion-label>
           </ion-row>
           <ion-row>
-            <ion-input ref={(el) => this.course_name = el as HTMLIonInputElement} style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'Business Administration'} />
+            <ion-input name='name' onInput={(event) => this.update(event) } style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'Business Administration'} />
           </ion-row><ion-row>
           <ion-label>Course Number</ion-label>
         </ion-row>
           <ion-row>
-            <ion-input ref={(el) => this.course_number = el as HTMLIonInputElement} style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'e.g. MGMT 100'} />
+            <ion-input name='number' onInput={(event) => this.update(event) } style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'e.g. MGMT 100'} />
           </ion-row>
           <ion-row>
             <ion-label>Section Number</ion-label>
           </ion-row>
           <ion-row>
-            <ion-input ref={(el) => this.section = el as HTMLIonInputElement} style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'e.g. 001'} />
+            <ion-input name='section' onInput={(event) => this.update(event) } style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'e.g. 001'} />
           </ion-row>
           <ion-row>
             <ion-label>Term</ion-label>
           </ion-row>
           <ion-row>
-            <ion-input ref={(el) => this.term = el as HTMLIonInputElement} style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'Fall 2019'} />
+            <ion-input name='term' onInput={(event) => this.update(event) } style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'Fall 2019'} />
           </ion-row>
           <ion-row>
             <ion-label>Instructor</ion-label>
           </ion-row>
           <ion-row>
-            <ion-input ref={(el) => this.instructor = el as HTMLIonInputElement} style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'Dr. Ben Jeezy'} />
+            <ion-input name='instructor' onInput={(event) => this.update(event) } style={{fontWeight:'bolder', fontSize:'1.2rem'}} placeholder={'Dr. Ben Jeezy'} />
           </ion-row>
           <ion-row>
             <ion-label>Color</ion-label>
+          </ion-row>
+          <ion-row>
             <color-picker ref={(el) => this.colorPicker = el}/>
           </ion-row>
           <section>

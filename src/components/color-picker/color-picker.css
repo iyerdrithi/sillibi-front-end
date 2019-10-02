@@ -9,7 +9,12 @@
 
 .outerCircle {
   position: relative;
+  background-color: white;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%
+}
+
+.selectedCircle {
+  border: 5px solid black;
 }

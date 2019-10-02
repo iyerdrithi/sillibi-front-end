@@ -22,12 +22,12 @@ export class MyCoursesCard {
       return (
         <ion-card>
           <ion-card-content class='ion-no-padding'>
-            <ion-item href={`/courseinfo/?course_id=${course.id}`} class='ion-no-padding' lines={'full'}>
-              <ion-label style={{marginLeft: '1.2rem'}}>{course.course_name}</ion-label>
+            <ion-item href={`#/courseinfo/?course_id=${course.id}`} class='ion-no-padding' lines={'full'} style={{'--border-color': course.color}}>
+              <ion-label style={{marginLeft: '1.2rem'}}>{course.name}</ion-label>
             </ion-item>
             <ion-item lines={'none'}>
               <ion-label
-                style={{fontSize: '1rem', fontWeight: 'lighter'}}>{course.course_number} - {course.section}</ion-label>
+                style={{fontSize: '1rem', fontWeight: 'lighter'}}>{course.number} - {course.section}</ion-label>
             </ion-item>
             <ion-item lines='full'>
               <ion-label style={{fontSize: '1rem', fontWeight: 'lighter'}}>{course.instructor}</ion-label>
@@ -40,8 +40,8 @@ export class MyCoursesCard {
                     <ion-icon size='large' slot={'start'} name={'document'} style={{color: 'skyblue'}}/>
                     <ion-label style={{paddingLeft: '1rem'}}>Syllabus</ion-label>
                     <ion-label style={{flex: 'none'}} slot={'end'}>0</ion-label>
-                    <ion-button size='large' slot='end' color={'transparent'} icon-only item-end
-                                href={'/syllabusupload'}>
+                    <ion-button size='large' slot='end' color={'transparent'} icon-only item-end clear
+                                href={`#/syllabusupload/?course_id=${course.id}`}>
                       <ion-icon style={{color: 'skyblue'}} name="add-circle"/>
                     </ion-button>
                   </ion-item>
@@ -57,7 +57,7 @@ export class MyCoursesCard {
                     <ion-label style={{paddingLeft: '1rem'}}>Assignments</ion-label>
                     <ion-label style={{flex: 'none'}} slot={'end'}>0</ion-label>
                     <ion-button size='large' slot='end' color={'transparent'} icon-only item-end
-                                href={`/addassignment/${course.id}`}>
+                                href={`/addassignments/?course_id=${course.id}`}>
                       <ion-icon style={{color: 'skyblue'}} slot='end' name="add-circle"/>
                     </ion-button>
                   </ion-item>
@@ -77,7 +77,7 @@ export class MyCoursesCard {
         {this.renderCourses()}
         <ion-row>
           <ion-col>
-            <a href={'/#/addcourse'}><img id='addCourse' src={'../assets/icon/addcourse.svg'}/></a>
+            <a href={'#/addcourse'}><img id='addCourse' src={'../assets/icon/addcourse.svg'}/></a>
           </ion-col>
         </ion-row>
       </ion-content>

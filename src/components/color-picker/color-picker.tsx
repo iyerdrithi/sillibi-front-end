@@ -18,14 +18,19 @@ export class ColorPicker {
     ['#FF6200', '#80006F', '#DA0AFF', '#28e070', '#006B2E'],
   ];
 
+  componentWillLoad() {
+    this.selectedColor = this.colors[0][0];
+  }
+
+
   renderColors() {
     return this.colors.map((row) => {
       return (
-        <ion-row class="ion-padding" align-content-center justify-content-around>
+        <ion-row class="ion-padding" >
           {row.map((color) => {
             return (
               <ion-col>
-                <div class={'outerCircle'}>
+                <div class={'outerCircle' + (this.selectedColor === color ? "selectedCircle" : "")}>
                 <div class="circle" style={{background: color}} onClick={() => this.selectedColor = color}/>
                 </div>
               </ion-col>

@@ -35,6 +35,14 @@ export class SyllabusView {
 
   render() {
     return [
+      <ion-header>
+        <ion-toolbar style={{marginBottom:'2rem'}}>
+          <ion-buttons slot={'start'}>
+            <ion-back-button defaultHref={'mycourses'}/>
+          </ion-buttons>
+          <ion-title>Syllabus</ion-title>
+        </ion-toolbar>
+      </ion-header>,
       <ion-content fullscreen>
         {this.renderSyllabuses()}
       </ion-content>

@@ -1,6 +1,7 @@
 import {Component, h} from '@stencil/core';
 import {SessionService} from "../../services/session.service";
 import {CourseHttpService} from "../../http_services/course.service";
+import {Component, h, State} from '@stencil/core';
 
 @Component({
   tag: 'my-courses-card',
@@ -40,7 +41,7 @@ export class MyCoursesCard {
                             style={{background: 'transparent', paddingLeft: '1px'}}>
                     <ion-icon size='large' slot={'start'} name={'document'} style={{color: 'skyblue'}}/>
                     <ion-label style={{paddingLeft: '1rem'}}>Syllabus</ion-label>
-                    <ion-label style={{flex: 'none'}} slot={'end'}>0</ion-label>
+                    <ion-label style={{flex: 'none'}} slot={'end'}>{course.syllabuses_count}</ion-label>
                     <ion-button size='large' slot='end' color={'transparent'} icon-only item-end
                                 href={`#/syllabusupload/?course_id=${course.id}`}>
                       <ion-icon style={{color: 'skyblue'}} name="add-circle"/>

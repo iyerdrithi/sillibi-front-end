@@ -11,6 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface AddCourse {}
   interface AppAddassignments {}
+  interface AppAssignmentcard {}
   interface AppAssignmentinfo {}
   interface AppAssignments {}
   interface AppEditProfile {}
@@ -43,6 +44,12 @@ declare global {
   var HTMLAppAddassignmentsElement: {
     prototype: HTMLAppAddassignmentsElement;
     new (): HTMLAppAddassignmentsElement;
+  };
+
+  interface HTMLAppAssignmentcardElement extends Components.AppAssignmentcard, HTMLStencilElement {}
+  var HTMLAppAssignmentcardElement: {
+    prototype: HTMLAppAssignmentcardElement;
+    new (): HTMLAppAssignmentcardElement;
   };
 
   interface HTMLAppAssignmentinfoElement extends Components.AppAssignmentinfo, HTMLStencilElement {}
@@ -137,6 +144,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'add-course': HTMLAddCourseElement;
     'app-addassignments': HTMLAppAddassignmentsElement;
+    'app-assignmentcard': HTMLAppAssignmentcardElement;
     'app-assignmentinfo': HTMLAppAssignmentinfoElement;
     'app-assignments': HTMLAppAssignmentsElement;
     'app-edit-profile': HTMLAppEditProfileElement;
@@ -158,6 +166,7 @@ declare global {
 declare namespace LocalJSX {
   interface AddCourse {}
   interface AppAddassignments {}
+  interface AppAssignmentcard {}
   interface AppAssignmentinfo {}
   interface AppAssignments {}
   interface AppEditProfile {}
@@ -177,6 +186,7 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'add-course': AddCourse;
     'app-addassignments': AppAddassignments;
+    'app-assignmentcard': AppAssignmentcard;
     'app-assignmentinfo': AppAssignmentinfo;
     'app-assignments': AppAssignments;
     'app-edit-profile': AppEditProfile;
@@ -203,6 +213,7 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'add-course': LocalJSX.AddCourse & JSXBase.HTMLAttributes<HTMLAddCourseElement>;
       'app-addassignments': LocalJSX.AppAddassignments & JSXBase.HTMLAttributes<HTMLAppAddassignmentsElement>;
+      'app-assignmentcard': LocalJSX.AppAssignmentcard & JSXBase.HTMLAttributes<HTMLAppAssignmentcardElement>;
       'app-assignmentinfo': LocalJSX.AppAssignmentinfo & JSXBase.HTMLAttributes<HTMLAppAssignmentinfoElement>;
       'app-assignments': LocalJSX.AppAssignments & JSXBase.HTMLAttributes<HTMLAppAssignmentsElement>;
       'app-edit-profile': LocalJSX.AppEditProfile & JSXBase.HTMLAttributes<HTMLAppEditProfileElement>;

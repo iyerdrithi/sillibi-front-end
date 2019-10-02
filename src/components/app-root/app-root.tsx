@@ -30,6 +30,7 @@ export class AppRoot {
           <ion-route url="/syllabusupload" component="syllabus-upload" />
           <ion-route url="/syllabusview" component="syllabus-view" />
           <ion-route url="/assignmentinfo" component="app-assignmentinfo" />
+          <ion-route url="/assignmentcard" component="app-assignmentcard" />
         </ion-router>
         <ion-nav />
       </ion-app>

@@ -6,6 +6,14 @@ import {Component, h,} from '@stencil/core';
 })
 export class AppAssignmentinfo {
 
+  assignmentcard() {
+    return [
+      <app-assignmentcard>
+
+      </app-assignmentcard>
+    ]
+  }
+
   render() {
     return [
       <ion-header>
@@ -13,6 +21,12 @@ export class AppAssignmentinfo {
           <ion-title>Assignments</ion-title>
         </ion-toolbar>
       </ion-header>,
+
+      <ion-content>
+        {
+          this.assignmentcard()
+        }
+      </ion-content>
     ]
   }
 }

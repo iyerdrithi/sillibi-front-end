@@ -34,6 +34,11 @@ export class SyllabusUpload {
 
   }
 
+  upload() {
+    const button = document.querySelector("#file-upload") as HTMLButtonElement;
+    button.click();
+  }
+
 
   render() {
     return [
@@ -60,9 +65,7 @@ export class SyllabusUpload {
       </ion-row>,
       <ion-row style={{marginBottom:'3rem'}}>
         <ion-col style={{textAlign:'center'}}>
-          <label for="file-upload" class="custom-file-upload">
-            <i class="fa fa-cloud-upload"></i> Upload Syllabus
-          </label>
+          <ion-button fill={"clear"} onClick={() => this.upload() }>Upload Syllabus</ion-button>
           <input onChange={() => this.Main()} id="file-upload" type="file"/>
         </ion-col>
       </ion-row>

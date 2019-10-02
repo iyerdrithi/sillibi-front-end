@@ -4,8 +4,4 @@ export class UserHttpService extends CrudHttpService {
   constructor() {
     super('users');
   }
-
-  headers() {
-    return {};
-  }
 }

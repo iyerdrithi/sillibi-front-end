@@ -1,26 +1,33 @@
 import { Component, h} from '@stencil/core';
-import _ from 'underscore';
+// import { UserHttpService } from "../../http_services/user.service";
+import {AppRoot} from "../app-root/app-root";
 
 @Component({
   tag: 'app-home',
   styleUrl: 'app-home.css'
 })
 export class AppHome {
-  address = 'http://localhost:3000/users';
+  address = 'http://localhost:3000/oauth/token';
   email: HTMLIonInputElement;
   password: HTMLIonInputElement;
   users: [];
 
   async login() {
-    const response = await fetch(this.address);
+    let form_data = new FormData();
+    form_data.append("email", this.email.value);
+    form_data.append("password", this.password.value);
+    form_data.append("grant_type", "password");
+    const response = await fetch(this.address, {
+      method: 'POST',
+      body: form_data
+    });
     const objects = await response.json();
-    this.users = objects.data;
-    debugger;
-    if (_.pluck(this.users, "email").includes(this.email)) {
-
-    }
-
+    localStorage.setItem("token", JSON.stringify(objects));
+    console.log(objects);
+    await AppRoot.route('profile/');
   }
+
+
 
   render() {
     return [

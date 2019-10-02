@@ -25,6 +25,8 @@ export class AppRoot {
           <ion-route url="/addassignments" component="app-addassignments" />
           <ion-route url="/courseinfo" component="course-info" />
           <ion-route url="/registration" component="app-registration" />
+          <ion-route url="/profile" component="app-profile" />
+          <ion-route url="/edit_profile" component="app-edit-profile" />
         </ion-router>
         <ion-nav />
       </ion-app>

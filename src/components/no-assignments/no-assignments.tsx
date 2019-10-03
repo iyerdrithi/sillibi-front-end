@@ -1,10 +1,16 @@
 import {Component, h} from '@stencil/core';
+import {RouteService} from "../../services/route.service";
 
 @Component({
   tag: 'no-assignments',
   styleUrl: 'no-assignments.css'
 })
 export class noAssignments {
+  params: any;
+
+  componentWillLoad() {
+    this.params = RouteService.params()
+  }
 
   render() {
     return [
@@ -23,7 +29,7 @@ export class noAssignments {
         </ion-row>
         <ion-row>
           <ion-col text-center>
-            <ion-button href={"/addassignments"} fill={"clear"}> INPUT MANUAL ASSIGNMENTS </ion-button>
+            <ion-button href={`/addassignments/?course_id=${this.params.course_id}`} fill={"clear"}> INPUT MANUAL ASSIGNMENTS </ion-button>
           </ion-col>
         </ion-row>
       </ion-content>

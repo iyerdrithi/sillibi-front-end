@@ -67,17 +67,17 @@ export class AppProfile {
           <ion-grid>
             <ion-row align-items-center={true} justify-content-around={true}>
               <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
-                <ion-label position={"floating"} color={"medium"}>First Name</ion-label><ion-input placeholder={this.first_name}/>
+                <ion-label position={"floating"} color={"medium"}>First Name</ion-label><ion-input readonly value={this.first_name}/>
               </ion-item>
             </ion-row>
             <ion-row align-items-center={true} justify-content-around={true}>
               <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
-                <ion-label position={"floating"} color={"medium"}>Last Name</ion-label><ion-input placeholder={this.last_name}/>
+                <ion-label position={"floating"} color={"medium"}>Last Name</ion-label><ion-input readonly value={this.last_name}/>
               </ion-item>
             </ion-row>
             <ion-row align-items-center={true} justify-content-around={true}>
               <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
-                <ion-label position={"floating"} color={"medium"}>Email Address</ion-label><ion-input placeholder={this.email}/>
+                <ion-label position={"floating"} color={"medium"}>Email Address</ion-label><ion-input readonly value={this.email}/>
               </ion-item>
             </ion-row>
             <ion-row>

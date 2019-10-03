@@ -63,7 +63,7 @@ export class CourseInfo {
         <ion-toolbar>
           <ion-title>{this.editing ? 'Editing Course' : 'Course Info'}</ion-title>
           <ion-buttons slot="start">
-            <ion-back-button defaultHref="/mycourses"/>
+            <app-back-button defaultHref="mycourses"/>
           </ion-buttons>
           <ion-buttons slot="primary">
             <ion-button onClick={() => this.onEditCancelClicked()}>

@@ -47,7 +47,7 @@ export class SyllabusUpload {
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button defaultHref={'/mycourses'}/>
+            <app-back-button defaultHref={'mycourses'}/>
           </ion-buttons>
           <ion-title>Syllabus Upload</ion-title>
         </ion-toolbar>

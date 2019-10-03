@@ -83,40 +83,35 @@ export class CourseInfo {
                 <ion-label position="stacked">Course Name</ion-label>
                 <ion-input ref={(el) => this.name = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.name : null}
-                           value={this.editing ? null : this.course.name}
+                           value={this.course.name}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Course Number</ion-label>
                 <ion-input ref={(el) => this.number = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.number : null}
-                           value={this.editing ? null : this.course.number}
+                           value={this.course.number}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Section Number</ion-label>
                 <ion-input ref={(el) => this.section = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.section : null}
-                           value={this.editing ? null : this.course.section}
+                           value={this.course.section}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Term</ion-label>
                 <ion-input ref={(el) => this.term = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.term : null}
-                           value={this.editing ? null : this.course.term}
+                           value={this.course.term}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Instructor</ion-label>
                 <ion-input ref={(el) => this.instructor = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.instructor : null}
-                           value={this.editing ? null : this.course.instructor}
+                           value={this.course.instructor}
                            readonly={!this.editing}/>
               </ion-item>
               {!this.editing ? [
@@ -130,10 +125,10 @@ export class CourseInfo {
                   <ion-label>Syllabus uploads</ion-label>
                   <ion-note slot={'end'}>{this.course.syllabuses_count}</ion-note>
                 </ion-item>,
-                <ion-item lines={'full'}>
+                <ion-item href={`#/myassignments/?course_id=${this.params.course_id}`} lines={'full'}>
                   <ion-icon slot={'start'} name={'paper'} style={{color: 'skyblue'}}/>
                   <ion-label>Assignments</ion-label>
-                  <ion-note slot={'end'}>0</ion-note>
+                  <ion-note slot={'end'}>{this.course.assignments_count}</ion-note>
                 </ion-item>
               ] : null}
             </ion-list>

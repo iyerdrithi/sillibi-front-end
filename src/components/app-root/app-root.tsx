@@ -64,16 +64,16 @@ export class AppRoot {
           <ion-route url="/colorpicker" component="color-picker" />
           <ion-route url="/addcourse" component="add-course" />
           <ion-route url="/mycourses" component="my-courses" />
-          <ion-route url="/assignments" component="app-assignments" />
-          <ion-route url="/addassignments" component="app-addassignments" />
+          <ion-route url="/addassignments" component="add-assignments" />
           <ion-route url="/courseinfo" component="course-info" />
           <ion-route url="/registration" component="app-registration" />
           <ion-route url="/profile" component="app-profile" />
           <ion-route url="/edit_profile" component="app-edit-profile" />
           <ion-route url="/syllabusupload" component="syllabus-upload" />
           <ion-route url="/syllabusview" component="syllabus-view" />
-          <ion-route url="/assignmentinfo" component="app-assignmentinfo" />
-          <ion-route url="/assignmentcard" component="app-assignmentcard" />
+          <ion-route url="/myassignmentsinfo" component="my-assignments-info" />
+          <ion-route url="/myassignmentscard" component="my-assignments-card" />
+          <ion-route url="/myassignments" component="my-assignments" />
         </ion-router>
         <ion-nav />
       </ion-app>

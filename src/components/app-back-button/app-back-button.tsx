@@ -8,9 +8,10 @@ import {AppRoot} from "../app-root/app-root";
 export class AppBackButton {
 
   @Prop() defaultHref: string;
+  @Prop() forceHref: string;
 
   async back() {
-    await AppRoot.route(AppRoot.getHistory().pop() || this.defaultHref);
+    await AppRoot.route(this.forceHref || AppRoot.getHistory().pop() || this.defaultHref);
   }
 
   render() {

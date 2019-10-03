@@ -57,13 +57,13 @@ export class MyCoursesCard {
             <ion-row>
               <ion-toolbar>
                 <ion-list>
-                  <ion-item class='ion-no-padding' lines={'full'}
+                  <ion-item href={`#/myassignments/?course_id=${course.id}`} class='ion-no-padding' lines={'full'}
                             style={{background: 'transparent', paddingLeft: '1px'}}>
                     <ion-icon size='large' slot={'start'} name={'paper'} style={{color: 'skyblue'}}/>
                     <ion-label style={{paddingLeft: '1rem'}}>Assignments</ion-label>
-                    <ion-label style={{flex: 'none'}} slot={'end'}>0</ion-label>
+                    <ion-label style={{flex: 'none'}} slot={'end'}>{course.assignments_count}</ion-label>
                     <ion-button size='large' slot='end' color={'transparent'} icon-only item-end
-                                href={`/addassignments/?course_id=${course.id}`}>
+                                href={`#/addassignments/?course_id=${course.id}`}>
                       <ion-icon style={{color: 'skyblue'}} slot='end' name="add-circle"/>
                     </ion-button>
                   </ion-item>

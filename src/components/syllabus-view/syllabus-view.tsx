@@ -57,7 +57,7 @@ export class SyllabusView {
       <ion-header>
         <ion-toolbar style={{marginBottom:'2rem'}}>
           <ion-buttons slot={'start'}>
-            <ion-back-button defaultHref={'mycourses'}/>
+            <app-back-button defaultHref={'mycourses'}/>
           </ion-buttons>
           <ion-title>Syllabus</ion-title>
         </ion-toolbar>

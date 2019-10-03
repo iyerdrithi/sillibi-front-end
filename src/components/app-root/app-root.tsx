@@ -1,4 +1,4 @@
-import {Component, h} from '@stencil/core';
+import {Component, h, Prop} from '@stencil/core';
 import {CrudHttpService} from "../../http_services/crud.service";
 import {SessionService} from "../../services/session.service";
 import {toastController} from "@ionic/core";
@@ -8,6 +8,12 @@ import {toastController} from "@ionic/core";
   styleUrl: 'app-root.css'
 })
 export class AppRoot {
+  @Prop() history = [];
+
+  static getHistory() {
+    return document.querySelector('app-root').history;
+  }
+
   static getRouter() {
     return document.querySelector('ion-router')
   }
@@ -26,6 +32,7 @@ export class AppRoot {
   }
 
   private static async onIonRouteWillChange(event) {
+    AppRoot.getHistory().push(event.detail.from);
     if(['/', '/registration', '/login'].includes(event.detail.to)) {
       if(SessionService.get().token) {
         window.location.href = '#/profile';

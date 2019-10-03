@@ -8,27 +8,32 @@ import {AppRoot} from "../app-root/app-root";
   styleUrl: 'app-home.css'
 })
 export class AppHome {
-  address = 'http://localhost:3000/oauth/token';
   email: HTMLIonInputElement;
   password: HTMLIonInputElement;
   users: [];
 
-  async login() {
-    let form_data = new FormData();
-    form_data.append("email", this.email.value);
-    form_data.append("password", this.password.value);
-    form_data.append("grant_type", "password");
-
-    const response = await fetch(this.address, {
-      method: 'POST',
-      body: form_data
-    });
-    const token = await response.json();
-    localStorage.setItem("token", JSON.stringify(token));
-    SessionService.set({token: token.access_token});
-    const objects = await new UserHttpService().query({});
-    SessionService.set({token: token.access_token, user_id: objects[0].id});
-    await AppRoot.route('profile/');
+  static async login(email, password, user?) {
+    try {
+      let form_data = new FormData();
+      form_data.append("email", email);
+      form_data.append("password", password);
+      form_data.append("grant_type", "password");
+      const response = await fetch('http://localhost:3000/oauth/token', {
+        method: 'POST',
+        body: form_data
+      });
+      const token = await response.json();
+      if(token.error) {
+        await AppRoot.showMessage('Invalid username or password', 'danger');
+        return;
+      }
+      SessionService.set({token: token.access_token});
+      user = user || await new UserHttpService().query({});
+      SessionService.set({token: token.access_token, user_id: user.id});
+      await AppRoot.route('profile/');
+    } catch(err) {
+      await AppRoot.showMessage('Error: please try again', 'danger');
+    }
   }
 
 
@@ -45,14 +50,13 @@ export class AppHome {
           </ion-row>
           <ion-row align-items-center={true} justify-content-around={true}>
             <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
-              <ion-input placeholder={"Password"} ref={ (field) => this.password = field as HTMLIonInputElement }/>
+              <ion-input type="password" placeholder={"Password"}
+                         ref={ (field) => this.password = field as HTMLIonInputElement }/>
             </ion-item>
           </ion-row>
           <ion-row align-items-center={true} justify-content-around={true} style={{marginTop:"6vh"}}>
-            <ion-button onClick={ () => this.login() } size="default" color="warning" style={{width:"80vw"}} expand={"full"}><ion-text color="dark">LOGIN</ion-text></ion-button>
-          </ion-row>
-          <ion-row align-items-center justify-content-around>
-            <ion-button href="#/registration" size="default" style={{width:"80vw"}} expand={"full"}>LOGIN USING FACEBOOK</ion-button>
+            <ion-button onClick={ () => AppHome.login(this.email.value, this.password.value) }
+                        size="default" color="warning" style={{width:"80vw"}} expand={"full"}><ion-text color="dark">LOGIN</ion-text></ion-button>
           </ion-row>
           <ion-row align-items-center justify-content-around style={{marginTop:"6vh"}}>
             <p>Don't have an account?</p>

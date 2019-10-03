@@ -11,4 +11,8 @@ export class SessionService {
   static set(data) {
     localStorage.setItem('session', JSON.stringify(data));
   }
+
+  static clear() {
+    localStorage.removeItem('session');
+  }
 }

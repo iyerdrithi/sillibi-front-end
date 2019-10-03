@@ -1,5 +1,8 @@
-import { Component, h } from '@stencil/core';
+import {Component, h} from '@stencil/core';
 import {UserHttpService} from "../../http_services/user.service";
+import {SessionService} from "../../services/session.service";
+import {CrudHttpService} from "../../http_services/crud.service";
+import {AppRoot} from "../app-root/app-root";
 
 @Component({
   tag: 'app-profile',
@@ -14,18 +17,28 @@ export class AppProfile {
   text:boolean;
 
   async componentWillLoad() {
-    const objects = await new UserHttpService().query({});
-    console.log(objects);
-    this.first_name = objects[0].first_name ? objects[0].first_name : "Please update first name";
-    this.last_name = objects[0].last_name ? objects[0].last_name : "Please update last name";
-    this.email = objects[0].email ? objects[0].email : "Please update email";
-    this.id = objects[0].id ? objects[0].id : "N/A";
-    this.call = objects[0].call !== null ? objects[0].call : true;
-    this.text = objects[0].text !== null ? objects[0].text : true;
+    const user = await new UserHttpService().query({});
+    console.log(user);
+    this.first_name = user.first_name ? user.first_name : "Please update first name";
+    this.last_name = user.last_name ? user.last_name : "Please update last name";
+    this.email = user.email ? user.email : "Please update email";
+    this.id = user.id ? user.id : "N/A";
+    this.call = user.call !== null ? user.call : true;
+    this.text = user.text !== null ? user.text : true;
   }
 
   toggleIcon(value, name) {
     return value ? [<ion-icon color={"medium"} name={name} size={"large"} style={{marginTop:"2vh", marginBottom:"2vh", marginRight:"5vw"}}/>] : [];
+  }
+
+  async logout() {
+    await fetch('http://localhost:3000/oauth/revoke', {
+      method: 'POST',
+      headers: new CrudHttpService('').headers(),
+      body: JSON.stringify({token: SessionService.get().token})
+    });
+    SessionService.clear();
+    await AppRoot.route('/');
   }
 
   render() {
@@ -35,6 +48,9 @@ export class AppProfile {
           <ion-buttons slot="end">
             <ion-button href={`#/edit_profile`}>
               <ion-label color={"primary"}>Edit</ion-label>
+            </ion-button>
+            <ion-button onClick={() => this.logout()}>
+              <ion-label color={"primary"}>Logout</ion-label>
             </ion-button>
           </ion-buttons>
           <ion-title>My Profile</ion-title>

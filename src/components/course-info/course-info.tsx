@@ -63,7 +63,7 @@ export class CourseInfo {
         <ion-toolbar>
           <ion-title>{this.editing ? 'Editing Course' : 'Course Info'}</ion-title>
           <ion-buttons slot="start">
-            <ion-back-button defaultHref="/mycourses"/>
+            <app-back-button defaultHref="mycourses"/>
           </ion-buttons>
           <ion-buttons slot="primary">
             <ion-button onClick={() => this.onEditCancelClicked()}>
@@ -83,53 +83,52 @@ export class CourseInfo {
                 <ion-label position="stacked">Course Name</ion-label>
                 <ion-input ref={(el) => this.name = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.name : null}
-                           value={this.editing ? null : this.course.name}
+                           value={this.course.name}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Course Number</ion-label>
                 <ion-input ref={(el) => this.number = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.number : null}
-                           value={this.editing ? null : this.course.number}
+                           value={this.course.number}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Section Number</ion-label>
                 <ion-input ref={(el) => this.section = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.section : null}
-                           value={this.editing ? null : this.course.section}
+                           value={this.course.section}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Term</ion-label>
                 <ion-input ref={(el) => this.term = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.term : null}
-                           value={this.editing ? null : this.course.term}
+                           value={this.course.term}
                            readonly={!this.editing}/>
               </ion-item>
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Instructor</ion-label>
                 <ion-input ref={(el) => this.instructor = el as HTMLIonInputElement}
                            style={{fontSize: '1.2rem'}}
-                           placeholder={this.editing ? this.course.instructor : null}
-                           value={this.editing ? null : this.course.instructor}
+                           value={this.course.instructor}
                            readonly={!this.editing}/>
               </ion-item>
               {!this.editing ? [
                 <ion-item-divider/>,
-                <ion-item lines={'full'}>
+                <ion-item lines={'full'} button href={
+                            this.course.syllabuses_count > 0
+                              ? `/syllabusview/?course_id=${this.course.id}`
+                              : null
+                          }>
                   <ion-icon slot={'start'} name={'document'} style={{color: 'skyblue'}}/>
                   <ion-label>Syllabus uploads</ion-label>
-                  <ion-note slot={'end'}>0</ion-note>
+                  <ion-note slot={'end'}>{this.course.syllabuses_count}</ion-note>
                 </ion-item>,
-                <ion-item lines={'full'}>
+                <ion-item href={`#/myassignments/?course_id=${this.params.course_id}`} lines={'full'}>
                   <ion-icon slot={'start'} name={'paper'} style={{color: 'skyblue'}}/>
                   <ion-label>Assignments</ion-label>
-                  <ion-note slot={'end'}>0</ion-note>
+                  <ion-note slot={'end'}>{this.course.assignments_count}</ion-note>
                 </ion-item>
               ] : null}
             </ion-list>

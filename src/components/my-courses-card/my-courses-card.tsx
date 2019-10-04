@@ -1,20 +1,21 @@
 import {Component, h} from '@stencil/core';
+import {SessionService} from "../../services/session.service";
+import {CourseHttpService} from "../../http_services/course.service";
 
 @Component({
   tag: 'my-courses-card',
   styleUrl: 'my-courses-card.css'
 })
 export class MyCoursesCard {
-
-  courseEndPoint = 'http://localhost:3000/courses';
   courses: any[];
   async componentWillLoad() {
     await this.fetchCourseData();
   }
 
   async fetchCourseData() {
-    const res = await fetch(this.courseEndPoint);
-    this.courses = await res.json();
+    this.courses = await new CourseHttpService().query({
+      user_id: SessionService.get().user_id
+    })
   }
 
   renderCourses() {
@@ -36,10 +37,15 @@ export class MyCoursesCard {
               <ion-toolbar>
                 <ion-list>
                   <ion-item class='ion-no-padding' lines={'full'}
-                            style={{background: 'transparent', paddingLeft: '1px'}}>
+                            style={{background: 'transparent', paddingLeft: '1px'}}
+                            button={true} href={
+                              course.syllabuses_count > 0
+                                ? `#/syllabusview/?course_id=${course.id}`
+                                : `#/syllabusupload/?course_id=${course.id}`
+                            }>
                     <ion-icon size='large' slot={'start'} name={'document'} style={{color: 'skyblue'}}/>
                     <ion-label style={{paddingLeft: '1rem'}}>Syllabus</ion-label>
-                    <ion-label style={{flex: 'none'}} slot={'end'}>0</ion-label>
+                    <ion-label style={{flex: 'none'}} slot={'end'}>{course.syllabuses_count}</ion-label>
                     <ion-button size='large' slot='end' color={'transparent'} icon-only item-end
                                 href={`#/syllabusupload/?course_id=${course.id}`}>
                       <ion-icon style={{color: 'skyblue'}} name="add-circle"/>
@@ -51,13 +57,13 @@ export class MyCoursesCard {
             <ion-row>
               <ion-toolbar>
                 <ion-list>
-                  <ion-item class='ion-no-padding' lines={'full'}
+                  <ion-item href={`#/myassignments/?course_id=${course.id}`} class='ion-no-padding' lines={'full'}
                             style={{background: 'transparent', paddingLeft: '1px'}}>
                     <ion-icon size='large' slot={'start'} name={'paper'} style={{color: 'skyblue'}}/>
                     <ion-label style={{paddingLeft: '1rem'}}>Assignments</ion-label>
-                    <ion-label style={{flex: 'none'}} slot={'end'}>0</ion-label>
+                    <ion-label style={{flex: 'none'}} slot={'end'}>{course.assignments_count}</ion-label>
                     <ion-button size='large' slot='end' color={'transparent'} icon-only item-end
-                                href={`/addassignments/?course_id=${course.id}`}>
+                                href={`#/addassignments/?course_id=${course.id}`}>
                       <ion-icon style={{color: 'skyblue'}} slot='end' name="add-circle"/>
                     </ion-button>
                   </ion-item>

@@ -1,49 +1,48 @@
 import { Component, h } from '@stencil/core';
 import {RouteService} from "../../services/route.service";
+import {AssignmentHttpService} from "../../http_services/assignment.service";
+import {AppRoot} from "../app-root/app-root";
 
 @Component({
-  tag: 'app-addassignments',
-  styleUrl: 'app-addassignments.css'
+  tag: 'add-assignments',
+  styleUrl: 'add-assignments.css'
 })
-export class AppAddAssignments {
-  // courseEndPoint = 'http://localhost:3000/assignments';
+export class AddAssignments {
+  params: any;
   name: HTMLIonInputElement;
   date: HTMLIonDatetimeElement;
   description: HTMLIonTextareaElement;
   points: HTMLIonInputElement;
 
-  getAssignmentinput() {
-    let assignmentinfo = {
+  async componentWillLoad() {
+    this.params = RouteService.params()
+  }
+
+  async getAssignmentInput() {
+    let assignmentInfo = {
       "name": this.name.value,
       "date": this.date.value,
       "description": this.description.value,
       "points": this.points.value,
       "course_id": RouteService.params().course_id,
     };
-    this.postAssignmentinfo(assignmentinfo)
+    await this.postAssignmentInfo(assignmentInfo)
   }
 
-  postAssignmentinfo(assignmentinfo) {
-    fetch(`http://localhost:3000/assignments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(assignmentinfo)
-    })
-      .then(response => response.json())
-      .then(json => console.log(json))
+  async postAssignmentInfo(assignmentInfo) {
+    const response = await new AssignmentHttpService().post(assignmentInfo, {course_id: this.params.course_id});
+    AppRoot.getRouter().push(`myassignments/?course_id=${response.course_id}`, 'root');
+    console.log(response);
   }
 
   render() {
     return [
       <ion-header>
         <ion-toolbar>
-          <ion-title>Add Assignment</ion-title>
-          <ion-buttons slot="primary">
-            <ion-button href={'#/assignments'}>Cancel</ion-button>
+          <ion-buttons slot="start">
+            <ion-back-button defaultHref={'/mycourses'}/>
           </ion-buttons>
+          <ion-title>Add Assignment</ion-title>
         </ion-toolbar>
       </ion-header>,
 
@@ -73,7 +72,7 @@ export class AppAddAssignments {
           <ion-input ref={(el) => this.points = el as HTMLIonInputElement} required type={"number"} min={"0"} max={"1000"} step={"1"} placeholder={"50"}> </ion-input>
         </ion-item>
 
-          <ion-button href={"/assignmentinfo"} onClick={()=> this.getAssignmentinput()} style={{marginTop:'120px'}} expand={"full"} color={"warning"}> CREATE ASSIGNMENT </ion-button>
+          <ion-button onClick={()=> this.getAssignmentInput()} style={{marginTop:'120px'}} expand={"full"} color={"warning"}> CREATE ASSIGNMENT </ion-button>
         </ion-card-content>
         </ion-card>
       </ion-content>

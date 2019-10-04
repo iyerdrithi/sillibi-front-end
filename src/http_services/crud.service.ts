@@ -1,4 +1,3 @@
-import {RouteService} from '../services/route.service';
 import {SessionStorageService} from '../services/session-storage.service';
 import {SessionService} from '../services/session.service';
 
@@ -14,7 +13,7 @@ export class CrudHttpService {
 
   headers(): any {
     const token = SessionService.get().token;
-    return {Authorization: `Token token=${token}`, 'Session-Id': token};
+    return {Authorization: `Bearer ${token}`};
   }
 
   async query(params: any, cache: boolean = false) {
@@ -113,8 +112,9 @@ export class CrudHttpService {
       if (response.status === 204) {
         return [];
       } else if (response.status === 403) {
-        if (location.hash.includes('errors')) { return; }
-        location.hash = `/errors/unauthorized/?organization_id=${RouteService.params().organization_id}`;
+        // if (location.hash.includes('errors')) { return; }
+        // location.hash = `/errors/unauthorized/?organization_id=${RouteService.params().organization_id}`;
+        return;
       } else {
         const data = await response.json();
         if (cache) {
@@ -124,8 +124,8 @@ export class CrudHttpService {
       }
     } catch (error) {
       console.error(error);
-      if (location.hash.includes('errors')) { return; }
-      location.hash = `/errors/server/?organization_id=${RouteService.params().organization_id}`;
+      // if (location.hash.includes('errors')) { return; }
+      // location.hash = `/errors/server/?organization_id=${RouteService.params().organization_id}`;
     }
   }
 

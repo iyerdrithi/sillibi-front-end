@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import {Component, Element, h, State} from '@stencil/core';
 import {AppRoot} from "../app-root/app-root";
 import {CourseHttpService} from "../../http_services/course.service";
 import {SessionService} from "../../services/session.service";
@@ -8,10 +8,25 @@ import {SessionService} from "../../services/session.service";
   styleUrl: 'add-course.css'
 })
 export class AddCourse {
-  colorPicker: HTMLColorPickerElement;
+  @Element() el: Element;
+
   @State() course: any = {};
 
+  colorPicker: HTMLColorPickerElement;
+
   async getAddCourseInfo() {
+    let validated = true;
+    this.el.querySelectorAll('ion-input').forEach((element) => {
+      if(!element.value || element.value.trim().length === 0) {
+        validated = false;
+      }
+    });
+
+    if(!validated) {
+      await AppRoot.showMessage('Please fill out all fields', 'danger');
+      return;
+    }
+
     this.course.color = await this.colorPicker.getSelectedColor();
     const course = await this.postCourseInfo();
     this.course = {...course};

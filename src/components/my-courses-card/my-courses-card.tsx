@@ -42,20 +42,20 @@ export class MyCoursesCard {
                 ? `#/syllabusview/?course_id=${course.id}`
                 : `#/syllabusupload/?course_id=${course.id}`
             }>
-              <ion-icon slot={'start'} name={'document'} style={{color: 'skyblue'}}/>
+              <ion-icon size="large" slot={'start'} name={'document'} style={{color: 'skyblue'}}/>
               <ion-label>Syllabus</ion-label>
               <ion-note slot="end">{course.syllabuses_count}</ion-note>
-              <ion-button size='large' slot='end' color={'transparent'}
+              <ion-button size='large' fill="clear" slot='end' color={'transparent'}
                           href={`#/syllabusupload/?course_id=${course.id}`}>
                 <ion-icon style={{color: 'skyblue'}} slot="icon-only" name="add-circle"/>
               </ion-button>
             </ion-item>
             <ion-item href={`#/myassignments/?course_id=${course.id}`} lines={'full'}
                       style={{background: 'transparent'}}>
-              <ion-icon slot={'start'} name={'paper'} style={{color: 'skyblue'}}/>
+              <ion-icon size="large" slot={'start'} name={'paper'} style={{color: 'skyblue'}}/>
               <ion-label>Assignments</ion-label>
               <ion-note slot={'end'}>{course.assignments_count}</ion-note>
-              <ion-button size='large' slot='end' color={'transparent'}
+              <ion-button size='large' fill="clear" slot='end' color={'transparent'}
                           href={`#/addassignments/?course_id=${course.id}`}>
                 <ion-icon style={{color: 'skyblue'}} slot='icon-only' name="add-circle"/>
               </ion-button>

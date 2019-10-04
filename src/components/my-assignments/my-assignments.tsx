@@ -34,7 +34,7 @@ export class MyAssignments {
   render() {
     return [
       <ion-header>
-        <ion-toolbar style={{marginBottom: '2rem'}}>
+        <ion-toolbar>
           {this.params.course_id ? (
             <ion-buttons slot={'start'}>
               <ion-button href={'#/mycourses'}>Back</ion-button>

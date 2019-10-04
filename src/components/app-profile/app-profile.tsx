@@ -49,7 +49,7 @@ export class AppProfile {
   render() {
     return [
       <ion-header>
-        <ion-toolbar color="light">
+        <ion-toolbar>
           <ion-buttons slot="end">
             <ion-button href={`#/edit_profile`}>
               <ion-label color={"primary"}>Edit</ion-label>
@@ -73,23 +73,25 @@ export class AppProfile {
           </ion-item>
           <ion-grid>
             <ion-row align-items-center={true} justify-content-around={true}>
-              <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
+              <ion-item lines="none" color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>First Name</ion-label><ion-input readonly value={this.first_name}/>
               </ion-item>
             </ion-row>
             <ion-row align-items-center={true} justify-content-around={true}>
-              <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
+              <ion-item lines="none" color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>Last Name</ion-label><ion-input readonly value={this.last_name}/>
               </ion-item>
             </ion-row>
             <ion-row align-items-center={true} justify-content-around={true}>
-              <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
+              <ion-item lines="none" color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>Email Address</ion-label><ion-input readonly value={this.email}/>
               </ion-item>
             </ion-row>
             <ion-row>
-              <ion-item lines={(!this.call && !this.text) ? "none" : "full"} color={"clear"} style={{width:"100vw"}}>
-                <ion-label position={"floating"} color={"medium"}>COMMUNICATION SETTINGS</ion-label>
+              <ion-item class="ion-padding-top"
+                        lines={(!this.call && !this.text) ? "none" : "full"}
+                        color={"clear"} style={{width:"100vw"}}>
+                <ion-label color={"medium"}>COMMUNICATION SETTINGS</ion-label>
               </ion-item>
             </ion-row>
             <ion-row>

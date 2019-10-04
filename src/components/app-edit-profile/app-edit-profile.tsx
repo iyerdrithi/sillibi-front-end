@@ -1,14 +1,16 @@
-import {Component, h} from '@stencil/core';
+import {Component, h, State} from '@stencil/core';
 import {AppRoot} from "../app-root/app-root";
 import {UserHttpService} from "../../http_services/user.service";
 import {SessionService} from "../../services/session.service";
+import {getBase64FromFile} from "../../helpers/utils";
 
 @Component({
   tag: 'app-edit-profile',
   styleUrl: 'app-edit-profile.css'
 })
 export class AppEditProfile {
-  user: { first_name:string, last_name:string, email:string, call: boolean, text: boolean};
+  user: { first_name:string, last_name:string, email:string, call: boolean, text: boolean, avatar: string};
+  @State() avatarBase64: string;
   first: HTMLIonInputElement;
   last: HTMLIonInputElement;
   email: HTMLIonInputElement;
@@ -21,6 +23,7 @@ export class AppEditProfile {
     this.user.email = this.user.email || "";
     this.call = this.user.call;
     this.text = this.user.text;
+    this.avatarBase64 = this.user.avatar;
   }
   async postProfile() {
     this.email.value = this.email.value || this.user.email;
@@ -32,11 +35,40 @@ export class AppEditProfile {
       'first_name':this.first.value,
       'last_name':this.last.value,
       'call':this.call,
-      'text':this.text
+      'text':this.text,
+      'avatar':this.avatarBase64
     });
     console.log(edit);
     await AppRoot.route('profile/');
   }
+
+  onAvatarClicked() {
+    const input = document.querySelector('#input-avatar') as HTMLInputElement;
+    input.click();
+  }
+
+  async onAvatarFileChanged(event) {
+    if (!event.target || event.target.files.length === 0) return;
+
+    const image = event.target.files[0] as File;
+
+    if(!image.type.toLowerCase().startsWith('image')) {
+      await AppRoot.showMessage(`Avatar must be an image`, 'danger');
+      return;
+    }
+
+    const kb_size = image.size / 1000;
+    const max_kb_size = 500;
+
+    if (kb_size > max_kb_size) {
+      await AppRoot.showMessage(`Avatar size must not exceed ${max_kb_size}kb`, 'danger');
+      return;
+    }
+
+    const encoded = await getBase64FromFile(image);
+    this.avatarBase64 = encoded.toString();
+  }
+
   render() {
     return [
       <ion-header>
@@ -52,9 +84,13 @@ export class AppEditProfile {
 
       <ion-content>
         <ion-card>
-          <ion-item lines={"none"} style={{marginLeft:"39vw", marginRight:"39vw", marginTop:"2vh", height:"8vh"}}>
-            <ion-avatar style={{borderRadius:"10vw", borderColor:"dark-purple"}}>
-              <img src="../../assets/icon/contact-avatar.png"/>
+          <ion-item class="ion-padding-vertical" lines={"none"} style={{display: 'table', margin: 'auto'}}>
+            <ion-avatar style={{borderColor:"dark-purple"}}>
+              <input id="input-avatar" type="file" accept="image/*" hidden
+                     onChange={(evt) => this.onAvatarFileChanged(evt)}/>
+              <img id="img-avatar" src={
+                this.avatarBase64 || "../../assets/icon/contact-avatar.png"
+              } onClick={() => this.onAvatarClicked()}/>
             </ion-avatar>
           </ion-item>
           <ion-grid>

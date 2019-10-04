@@ -31,7 +31,7 @@ export class AddAssignments {
 
   async postAssignmentInfo(assignmentInfo) {
     const response = await new AssignmentHttpService().post(assignmentInfo, {course_id: this.params.course_id});
-    AppRoot.getRouter().push(`myassignments/?course_id=${response.course_id}`, 'root');
+    AppRoot.getRouter().push(`myassignments/?course_id=${this.params.course_id}`, 'root');
     console.log(response);
   }
 

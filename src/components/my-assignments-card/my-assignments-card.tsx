@@ -12,8 +12,10 @@ export class MyAssignmentsCard {
   params: any;
   async componentWillLoad() {
     this.params = RouteService.params();
-    this.assignments = await new AssignmentHttpService().query({
+    this.assignments = (await new AssignmentHttpService().query({
       course_id: this.params.course_id
+    })).sort((a, b) => {
+      return new Date(a.date) < new Date(b.date) ? 1 : -1
     })
   }
 

@@ -23,6 +23,9 @@ export class AppEditProfile {
     this.text = this.user.text;
   }
   async postProfile() {
+    this.email.value = this.email.value || this.user.email;
+    this.first.value = this.first.value || this.user.first_name;
+    this.last.value = this.last.value || this.user.last_name;
     const edit = await new UserHttpService().put({
       'id':SessionService.get().user_id,
       'email':this.email.value,
@@ -38,8 +41,10 @@ export class AppEditProfile {
     return [
       <ion-header>
         <ion-toolbar color="light">
-          <ion-buttons slot="start">
-            <ion-back-button defaultHref={'#/profile'}/>
+          <ion-buttons slot="end">
+            <ion-button href="#/profile/">
+              <ion-label color={"primary"}>Cancel</ion-label>
+            </ion-button>
           </ion-buttons>
           <ion-title>Edit Profile</ion-title>
         </ion-toolbar>
@@ -56,19 +61,19 @@ export class AppEditProfile {
             <ion-row align-items-center={true} justify-content-around={true}>
               <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>First Name</ion-label>
-                <ion-input value={this.user.first_name} ref={ (field) => this.first = field as HTMLIonInputElement}/>
+                <ion-input placeholder={this.user.first_name} ref={ (field) => this.first = field as HTMLIonInputElement}/>
               </ion-item>
             </ion-row>
             <ion-row align-items-center={true} justify-content-around={true}>
               <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>Last Name</ion-label>
-                <ion-input value={this.user.last_name} ref={ (field) => this.last = field as HTMLIonInputElement}/>
+                <ion-input placeholder={this.user.last_name} ref={ (field) => this.last = field as HTMLIonInputElement}/>
               </ion-item>
             </ion-row>
             <ion-row align-items-center={true} justify-content-around={true}>
               <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>Email Address</ion-label>
-                <ion-input value={this.user.email} ref={ (field) => this.email = field as HTMLIonInputElement}/>
+                <ion-input placeholder={this.user.email} ref={ (field) => this.email = field as HTMLIonInputElement}/>
               </ion-item>
             </ion-row>
             <ion-row>

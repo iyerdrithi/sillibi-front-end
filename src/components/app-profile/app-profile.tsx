@@ -23,8 +23,8 @@ export class AppProfile {
     this.last_name = user.last_name ? user.last_name : "Please update last name";
     this.email = user.email ? user.email : "Please update email";
     this.id = user.id ? user.id : "N/A";
-    this.call = user.call !== null ? user.call : true;
-    this.text = user.text !== null ? user.text : true;
+    this.call = user.call;
+    this.text = user.text;
   }
 
   toggleIcon(value, name) {

@@ -75,10 +75,10 @@ export class CourseInfo {
       <ion-content>
         <ion-card>
           <ion-row style={{paddingTop: '5px'}} align-items-center justify-content-around>
-            <ion-icon style={{fontSize: '4rem'}} name="contact" color={'indigo'}></ion-icon>
+            <ion-icon style={{fontSize: '4rem'}} name="contact" color={'indigo'}/>
           </ion-row>
-          <ion-card-content>
-            <ion-list lines="none">
+          <ion-card-content class="ion-no-padding">
+            <ion-list lines="full">
               <ion-item lines={this.editing ? "inset" : "none"}>
                 <ion-label position="stacked">Course Name</ion-label>
                 <ion-input ref={(el) => this.name = el as HTMLIonInputElement}
@@ -115,7 +115,7 @@ export class CourseInfo {
                            readonly={!this.editing}/>
               </ion-item>
               {!this.editing ? [
-                <ion-item-divider/>,
+                <ion-item style={{'marginTop': '-1rem'}} lines="full"/>,
                 <ion-item lines={'full'} button href={
                             this.course.syllabuses_count > 0
                               ? `/syllabusview/?course_id=${this.course.id}`

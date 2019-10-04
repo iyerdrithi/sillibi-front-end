@@ -46,11 +46,11 @@ export class SyllabusView {
           <ion-button fill="clear" color="danger" onClick={() => this.deleteSyllabus(syllabus.id)}>
             Delete Syllabus
           </ion-button>
-          <embed style={{width: '100%', height: '100%'}} src={syllabus.base64} type="application/pdf">
+          <iframe style={{width: '100%', height: '100%'}} src={syllabus.base64}>
             {/*<ion-button onClick={() => window.location.href = syllabus.base64} fill="clear">*/}
             {/*  View PDF*/}
             {/*</ion-button>*/}
-          </embed>
+          </iframe>
         </ion-card>
       )
     })

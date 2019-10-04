@@ -23,8 +23,8 @@ export class AppProfile {
     this.last_name = objects[0].last_name ? objects[0].last_name : "Please update last name";
     this.email = objects[0].email ? objects[0].email : "Please update email";
     this.id = objects[0].id ? objects[0].id : "N/A";
-    this.call = objects[0].call ? objects[0].call : true;
-    this.text = objects[0].text ? objects[0].text : true;
+    this.call = objects[0].call;
+    this.text = objects[0].text;
   }
 
   toggleIcon(value, name) {
@@ -79,26 +79,7 @@ export class AppProfile {
         </ion-card>
       </ion-content>,
 
-      <ion-footer>
-        <ion-toolbar color={"dark-purple"} justify-content-around>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"warning"} name="contact" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="copy"size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="paper" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="more" size={"large"}/></ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-toolbar>
-      </ion-footer>
+      <app-footer/>
     ];
   }
 }

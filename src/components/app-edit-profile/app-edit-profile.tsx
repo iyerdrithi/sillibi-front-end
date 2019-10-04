@@ -27,6 +27,9 @@ export class AppEditProfile {
     this.user.text = this.user.text || true;
   }
   async postProfile() {
+    this.email.value = this.email.value || this.user.email;
+    this.first.value = this.first.value || this.user.first_name;
+    this.last.value = this.last.value || this.user.last_name;
     const token = JSON.parse(localStorage.getItem('token'))['access_token'];
     const response = await fetch(this.address, {
       method: 'PUT',
@@ -41,6 +44,11 @@ export class AppEditProfile {
     return [
       <ion-header>
         <ion-toolbar color="light">
+          <ion-buttons slot="end">
+            <ion-button href="#/profile/">
+              <ion-label color={"primary"}>Cancel</ion-label>
+            </ion-button>
+          </ion-buttons>
           <ion-title>Edit Profile</ion-title>
         </ion-toolbar>
       </ion-header>,
@@ -97,26 +105,7 @@ export class AppEditProfile {
         </ion-card>
       </ion-content>,
 
-      <ion-footer>
-        <ion-toolbar color={"dark-purple"} justify-content-around>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"warning"} name="contact" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="copy" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="paper" size={"large"}/></ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button icon-only item-end fill={"clear"}><ion-icon color={"medium"} name="more" size={"large"}/></ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-toolbar>
-      </ion-footer>
+      <app-footer/>
     ];
   }
 }

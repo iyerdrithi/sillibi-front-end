@@ -74,6 +74,7 @@ export class AppRoot {
           <ion-route url="/myassignmentsinfo" component="my-assignments-info" />
           <ion-route url="/myassignmentscard" component="my-assignments-card" />
           <ion-route url="/myassignments" component="my-assignments" />
+          <ion-route url="/allassignments" component="all-assignments" />
         </ion-router>
         <ion-nav />
       </ion-app>

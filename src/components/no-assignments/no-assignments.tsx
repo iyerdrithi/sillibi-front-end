@@ -23,13 +23,26 @@ export class noAssignments {
         <ion-row>
           <ion-col style={{textAlign:'center', marginTop:'1rem'}}>
             <ion-text style={{fontSize:'0.9rem', fontWeight:'bold', marginTop:'2rem'}}>
-              Our robots are working hard uploading other assignments. Would you like to manually upload them?
+              {this.params.course_id
+                ? "Our robots are working hard uploading other assignments." +
+                  "Would you like to manually upload them?"
+                : "Please create a course to add an assignment."}
             </ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col text-center>
-            <ion-button href={`/addassignments/?course_id=${this.params.course_id}`} fill={"clear"}> INPUT MANUAL ASSIGNMENTS </ion-button>
+            <ion-button href={
+              this.params.course_id
+                ? `/addassignments/?course_id=${this.params.course_id}`
+                : `/mycourses`
+            } fill={"clear"}>
+              {
+                this.params.course_id
+                  ? 'INPUT MANUAL ASSIGNMENTS'
+                  : 'GO TO COURSES PAGE'
+              }
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-content>

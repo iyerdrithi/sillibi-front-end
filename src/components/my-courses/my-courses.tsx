@@ -27,7 +27,7 @@ export class MyCourses {
   render() {
     return [
       <ion-header>
-        <ion-toolbar style={{marginBottom:'2rem'}}>
+        <ion-toolbar>
           <ion-title>My Courses</ion-title>
         </ion-toolbar>
       </ion-header>,

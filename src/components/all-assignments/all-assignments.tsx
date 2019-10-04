@@ -52,7 +52,7 @@ export class AllAssignments {
   render() {
     return [
       <ion-header>
-        <ion-toolbar style={{marginBottom: '2rem'}}>
+        <ion-toolbar>
           <ion-title>All Assignments</ion-title>
         </ion-toolbar>
       </ion-header>,

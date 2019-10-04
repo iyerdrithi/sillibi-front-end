@@ -13,6 +13,18 @@ export class AppHome {
   users: [];
 
   static async login(email, password, user?) {
+    let validated = true;
+    document.querySelectorAll('ion-input').forEach((element) => {
+      if(!element.value || element.value.trim().length === 0) {
+        validated = false;
+      }
+    });
+
+    if(!validated) {
+      await AppRoot.showMessage('Please fill out all fields', 'danger');
+      return;
+    }
+
     try {
       let form_data = new FormData();
       form_data.append("email", email);

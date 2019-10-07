@@ -20,7 +20,7 @@ export class CourseAssignmentCard {
           <ion-text style={{fontSize: '1rem', fontWeight: 'bold'}}> {assignment.name}</ion-text>
           <ion-text slot={"end"} style={{fontSize: '1rem', fontWeight: 'bold'}}>{assignment.points} pts</ion-text>
         </ion-item>,
-        <ion-item>
+        <ion-item lines="full">
           <ion-textarea readonly>
             {assignment.description}
           </ion-textarea>

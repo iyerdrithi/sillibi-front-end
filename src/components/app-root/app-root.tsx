@@ -1,7 +1,7 @@
 import {Component, h, Prop} from '@stencil/core';
 import {CrudHttpService} from "../../http_services/crud.service";
 import {SessionService} from "../../services/session.service";
-import {toastController} from "@ionic/core";
+import {loadingController, toastController} from "@ionic/core";
 
 @Component({
   tag: 'app-root',
@@ -29,6 +29,14 @@ export class AppRoot {
       duration
     });
     await toast.present();
+  }
+
+  static async showLoading(message): Promise<HTMLIonLoadingElement> {
+    const loading = await loadingController.create({
+      message
+    });
+    await loading.present();
+    return loading;
   }
 
   private static async onIonRouteWillChange(event) {

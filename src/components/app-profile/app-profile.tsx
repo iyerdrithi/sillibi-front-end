@@ -15,6 +15,7 @@ export class AppProfile {
   id:number;
   call:boolean;
   text:boolean;
+  avatar:string;
 
   async componentWillLoad() {
     const user = await new UserHttpService().query({});
@@ -25,10 +26,14 @@ export class AppProfile {
     this.id = user.id ? user.id : "N/A";
     this.call = user.call;
     this.text = user.text;
+    this.avatar = user.avatar;
   }
 
   toggleIcon(value, name) {
-    return value ? [<ion-icon color={"medium"} name={name} size={"large"} style={{marginTop:"2vh", marginBottom:"2vh", marginRight:"5vw"}}/>] : [];
+    return value ? [
+      <ion-icon color={"dark-purple"} name={name} size={"large"}
+                class="ion-padding"/>
+    ] : null;
   }
 
   async logout() {
@@ -44,7 +49,7 @@ export class AppProfile {
   render() {
     return [
       <ion-header>
-        <ion-toolbar color="light">
+        <ion-toolbar>
           <ion-buttons slot="end">
             <ion-button href={`#/edit_profile`}>
               <ion-label color={"primary"}>Edit</ion-label>
@@ -59,30 +64,34 @@ export class AppProfile {
 
       <ion-content>
         <ion-card>
-          <ion-item lines={"none"} style={{marginLeft:"39vw", marginRight:"39vw", marginTop:"2vh", height:"8vh"}}>
-            <ion-avatar style={{borderRadius:"10vw", borderColor:"dark-purple"}}>
-              <img src="../../assets/icon/contact-avatar.png"/>
+          <ion-item class="ion-padding-vertical" lines={"none"} style={{display: 'table', margin: 'auto'}}>
+            <ion-avatar style={{borderColor:"dark-purple"}}>
+              <img src={
+                this.avatar || "../../assets/icon/contact-avatar.png"
+              }/>
             </ion-avatar>
           </ion-item>
           <ion-grid>
             <ion-row align-items-center={true} justify-content-around={true}>
-              <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
+              <ion-item lines="none" color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>First Name</ion-label><ion-input readonly value={this.first_name}/>
               </ion-item>
             </ion-row>
             <ion-row align-items-center={true} justify-content-around={true}>
-              <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
+              <ion-item lines="none" color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>Last Name</ion-label><ion-input readonly value={this.last_name}/>
               </ion-item>
             </ion-row>
             <ion-row align-items-center={true} justify-content-around={true}>
-              <ion-item color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
+              <ion-item lines="none" color={"clear"} style={{width:"84vw", marginRight:"5vw"}}>
                 <ion-label position={"floating"} color={"medium"}>Email Address</ion-label><ion-input readonly value={this.email}/>
               </ion-item>
             </ion-row>
             <ion-row>
-              <ion-item lines={"full"} color={"clear"} style={{width:"100vw"}}>
-                <ion-label position={"floating"} color={"medium"}>COMMUNICATION SETTINGS</ion-label>
+              <ion-item class="ion-padding-top"
+                        lines={(!this.call && !this.text) ? "none" : "full"}
+                        color={"clear"} style={{width:"100vw"}}>
+                <ion-label color={"medium"}>COMMUNICATION SETTINGS</ion-label>
               </ion-item>
             </ion-row>
             <ion-row>

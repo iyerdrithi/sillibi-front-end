@@ -45,6 +45,11 @@ export class AppRegistration {
     }
   }
 
+  async onKeyDown(event) {
+    if(event.key === 'Enter')
+      await this.register();
+  }
+
   render() {
     return [
       <ion-content color={"dark-purple"}>
@@ -70,7 +75,8 @@ export class AppRegistration {
           <ion-row align-items-center={true} justify-content-around={true}>
             <ion-item color={"clear"} style={{width: "84vw", marginRight: "5vw"}}>
               <ion-label position={"floating"}>Password</ion-label>
-              <ion-input type="password" ref={(el) => this.password = el}/>
+              <ion-input type="password" ref={(el) => this.password = el}
+                         onKeyDown={(evt) => this.onKeyDown(evt)}/>
             </ion-item>
           </ion-row>
           <ion-row align-items-center={true} justify-content-around={true} style={{marginTop: "6vh"}}>

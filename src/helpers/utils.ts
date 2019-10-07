@@ -1,5 +1,8 @@
-
-
-export function sayHello() {
-  return Math.random() < 0.5 ? 'Hello' : 'Hola';
+export function getBase64FromFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 }

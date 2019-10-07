@@ -12,16 +12,21 @@ export class MyAssignments {
 
   async componentWillLoad() {
     this.params = RouteService.params();
-    this.assignments = await new AssignmentHttpService().query({
-      course_id: this.params.course_id
-    })
+    this.assignments = await new AssignmentHttpService().query(
+      this.params.course_id
+        ? {course_id: this.params.course_id}
+        : {}
+    )
   }
 
   emptyAssignmentsOrNah() {
     if (this.assignments.length > 0) {
-      return <my-assignments-card />
-    }
-    else {
+      if(this.params.course_id) {
+        return <my-assignments-card/>
+      } else {
+        return <all-assignments/>
+      }
+    } else {
       return <no-assignments/>
     }
   }
@@ -29,17 +34,19 @@ export class MyAssignments {
   render() {
     return [
       <ion-header>
-        <ion-toolbar style={{marginBottom:'2rem'}}>
-          <ion-buttons slot={'start'}>
-            <ion-button href={'#/mycourses'}>Back</ion-button>
-          </ion-buttons>
+        <ion-toolbar>
+          {this.params.course_id ? (
+            <ion-buttons slot={'start'}>
+              <ion-button href={'#/mycourses'}>Back</ion-button>
+            </ion-buttons>
+          ) : null}
           <ion-title>Assignments</ion-title>
         </ion-toolbar>
       </ion-header>,
       <ion-content>
-        {this.emptyAssignmentsOrNah()},
+        {this.emptyAssignmentsOrNah()}
       </ion-content>,
-      <app-footer />
+      <app-footer/>
 
     ];
   }

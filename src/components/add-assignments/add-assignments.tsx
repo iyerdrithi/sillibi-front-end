@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import {Component, Element, h} from '@stencil/core';
 import {RouteService} from "../../services/route.service";
 import {AssignmentHttpService} from "../../http_services/assignment.service";
 import {AppRoot} from "../app-root/app-root";
@@ -8,6 +8,8 @@ import {AppRoot} from "../app-root/app-root";
   styleUrl: 'add-assignments.css'
 })
 export class AddAssignments {
+  @Element() el: Element;
+
   params: any;
   name: HTMLIonInputElement;
   date: HTMLIonDatetimeElement;
@@ -19,6 +21,18 @@ export class AddAssignments {
   }
 
   async getAssignmentInput() {
+    let validated = true;
+    this.el.querySelectorAll('ion-input').forEach((element) => {
+      if(!element.value || element.value.trim().length === 0) {
+        validated = false;
+      }
+    });
+
+    if(!validated) {
+      await AppRoot.showMessage('Please fill out all fields', 'danger');
+      return;
+    }
+
     let assignmentInfo = {
       "name": this.name.value,
       "date": this.date.value,
@@ -31,7 +45,7 @@ export class AddAssignments {
 
   async postAssignmentInfo(assignmentInfo) {
     const response = await new AssignmentHttpService().post(assignmentInfo, {course_id: this.params.course_id});
-    AppRoot.getRouter().push(`myassignments/?course_id=${response.course_id}`, 'root');
+    AppRoot.getRouter().push(`myassignments/?course_id=${this.params.course_id}`, 'root');
     console.log(response);
   }
 

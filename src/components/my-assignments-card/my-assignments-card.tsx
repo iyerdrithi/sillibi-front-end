@@ -1,5 +1,5 @@
 import {Component, h} from '@stencil/core';
-import { AssignmentHttpService } from '../../http_services/assignment.service';
+import {AssignmentHttpService} from '../../http_services/assignment.service';
 import {RouteService} from "../../services/route.service";
 
 @Component({
@@ -9,52 +9,44 @@ import {RouteService} from "../../services/route.service";
 
 export class MyAssignmentsCard {
   assignments: any[];
+  courses: any[];
   params: any;
+
   async componentWillLoad() {
     this.params = RouteService.params();
     this.assignments = (await new AssignmentHttpService().query({
       course_id: this.params.course_id
     })).sort((a, b) => {
       return new Date(a.date) < new Date(b.date) ? 1 : -1
-    })
+    });
   }
 
-
   renderAssignments() {
+    let currentDateString;
     return this.assignments.map((assignment) => {
-      let convertedDate = new Date(assignment.date);
-      let dateString = convertedDate.toDateString();
-      return [
-          <ion-header style={{fontFamily:'Verdana', fontWeight:'lighter', marginLeft:'2rem'}}>
-            {dateString}
-          </ion-header>,
-        <ion-card>
-          <ion-card-content class='ion-no-padding'>
-            <ion-item href={`#/myassignmentsinfo/?assignment_id=${assignment.id}`}>
-              <ion-text style={{fontSize: '1rem', fontWeight: 'bold'}}> {assignment.name}</ion-text>
-              <ion-text slot={"end"} style={{fontSize: '1rem', fontWeight: 'bold'}}>{assignment.points} pts</ion-text>
-            </ion-item>
-            <ion-item>
-              <ion-textarea>
-                {assignment.description}
-              </ion-textarea>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
-      ]
+      const list = [
+        new Date(assignment.date).toDateString() !== currentDateString ? (
+          <ion-label class="ion-padding-horizontal"
+                     style={{fontFamily: 'Verdana', fontWeight: 'lighter'}}>
+            {new Date(assignment.date).toDateString()}
+          </ion-label>
+        ) : null,
+        <assignment-card assignment={assignment}/>
+      ];
+      currentDateString = new Date(assignment.date).toDateString();
+      return list;
     })
   }
 
   render() {
     return [
-      <ion-content>
-        {this.renderAssignments()},
-        <ion-row>
-          <ion-col style={{textAlign: 'center'}}>
-            <a href={`#/addassignments/?course_id=${this.params.course_id}`}><img id='addAssingment' src={'../assets/icon/BTN_AddAssignment.svg'} /></a>
-          </ion-col>
-        </ion-row>
-      </ion-content>
+      this.renderAssignments(),
+      <ion-row>
+        <ion-col style={{textAlign: 'center'}}>
+          <a href={`#/addassignments/?course_id=${this.params.course_id}`}><img id='addAssingment'
+                                                                                src={'../assets/icon/BTN_AddAssignment.svg'}/></a>
+        </ion-col>
+      </ion-row>
     ];
   }
 }

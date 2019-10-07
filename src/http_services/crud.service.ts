@@ -2,13 +2,14 @@ import {SessionStorageService} from '../services/session-storage.service';
 import {SessionService} from '../services/session.service';
 
 export class CrudHttpService {
+  static BASE_URL = `https://sillibi-group.herokuapp.com`;
   url: string;
   token: string;
   constructor(apiUrl: string) {
     // const env: any = EnvironmentService.config();
     // this.url = `${env.schema}://${env.host}/api/${apiUrl}`;
     // console.log(env);
-    this.url = `http://localhost:3000/${apiUrl}`;
+    this.url = `https://sillibi-group.herokuapp.com/${apiUrl}`; //`http://localhost:3000/${apiUrl}`;
   }
 
   headers(): any {

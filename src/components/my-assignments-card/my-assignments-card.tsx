@@ -1,4 +1,4 @@
-import {Component, h} from '@stencil/core';
+import {Component, h, State} from '@stencil/core';
 import {AssignmentHttpService} from '../../http_services/assignment.service';
 import {RouteService} from "../../services/route.service";
 
@@ -8,9 +8,11 @@ import {RouteService} from "../../services/route.service";
 })
 
 export class MyAssignmentsCard {
+  @State() shownAssignments: any[];
   assignments: any[];
   courses: any[];
   params: any;
+  searchBar: HTMLIonSearchbarElement;
 
   async componentWillLoad() {
     this.params = RouteService.params();
@@ -19,11 +21,12 @@ export class MyAssignmentsCard {
     })).sort((a, b) => {
       return new Date(a.date) > new Date(b.date) ? 1 : -1
     });
+    this.shownAssignments = this.assignments;
   }
 
   renderAssignments() {
     let currentDateString;
-    return this.assignments.map((assignment) => {
+    return this.shownAssignments.map((assignment) => {
       const list = [
         new Date(assignment.date).toDateString() !== currentDateString ? (
           <ion-label class="ion-padding-horizontal"
@@ -38,8 +41,16 @@ export class MyAssignmentsCard {
     })
   }
 
+  onSearchBarChanged(event) {
+    this.shownAssignments = this.assignments.filter((assignment) => {
+      return assignment.name.toLowerCase().match(event.detail.value.toLowerCase());
+    })
+  }
+
   render() {
     return [
+      <ion-searchbar ref={(el) => this.searchBar = el}
+                     onIonChange={(evt) => this.onSearchBarChanged(evt)}/>,
       this.renderAssignments(),
       <ion-row>
         <ion-col style={{textAlign: 'center'}}>

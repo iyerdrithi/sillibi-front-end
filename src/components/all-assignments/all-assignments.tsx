@@ -19,7 +19,7 @@ export class AllAssignments {
     this.params = RouteService.params();
     this.assignments = (await new AssignmentHttpService().query({}))
       .sort((a, b) => {
-        return new Date(a.date) < new Date(b.date) ? 1 : -1
+        return new Date(a.date) > new Date(b.date) ? 1 : -1
       });
     this.courses = await new CourseHttpService().query({
       user_id: SessionService.get().user_id

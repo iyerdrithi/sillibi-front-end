@@ -69,7 +69,7 @@ export class SyllabusUpload {
         <ion-row style={{marginBottom: '3rem'}}>
           <ion-col style={{textAlign: 'center'}}>
             <ion-button fill={"clear"} onClick={() => this.upload()}>Upload Syllabus</ion-button>
-            <input onChange={() => this.Main()} id="file-upload" type="file"/>
+            <input accept="image/x-png,image/gif,image/jpeg" onChange={() => this.Main()} id="file-upload" type="file"/>
           </ion-col>
         </ion-row>
       </ion-content>

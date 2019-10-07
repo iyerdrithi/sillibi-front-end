@@ -48,7 +48,7 @@ export class AppRoot {
     }
     let success = true;
     try {
-      const response = await fetch(`http://localhost:3000/oauth/token/info`, {
+      const response = await fetch(`${CrudHttpService.BASE_URL}/oauth/token/info`, {
         headers: new CrudHttpService('').headers()
       });
       const object = await response.json();

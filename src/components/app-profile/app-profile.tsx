@@ -37,7 +37,7 @@ export class AppProfile {
   }
 
   async logout() {
-    await fetch('http://localhost:3000/oauth/revoke', {
+    await fetch(  `${CrudHttpService.BASE_URL}/oauth/revoke`, {
       method: 'POST',
       headers: new CrudHttpService('').headers(),
       body: JSON.stringify({token: SessionService.get().token})

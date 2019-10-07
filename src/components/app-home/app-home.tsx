@@ -14,8 +14,8 @@ export class AppHome {
 
   static async login(email, password, user?) {
     let validated = true;
-    document.querySelectorAll('ion-input').forEach((element) => {
-      if(!element.value || element.value.trim().length === 0) {
+    [email, password].forEach((str) => {
+      if(!str || str.trim().length === 0) {
         validated = false;
       }
     });
@@ -24,6 +24,8 @@ export class AppHome {
       await AppRoot.showMessage('Please fill out all fields', 'danger');
       return;
     }
+
+    const loading = await AppRoot.showLoading('Logging in...');
 
     try {
       let form_data = new FormData();
@@ -36,14 +38,17 @@ export class AppHome {
       });
       const token = await response.json();
       if (token.error) {
+        await loading.dismiss();
         await AppRoot.showMessage('Invalid username or password', 'danger');
         return;
       }
       SessionService.set({token: token.access_token});
       user = user || await new UserHttpService().query({});
       SessionService.set({token: token.access_token, user_id: user.id});
+      await loading.dismiss();
       await AppRoot.route('profile/');
     } catch (err) {
+      await loading.dismiss();
       await AppRoot.showMessage('Error: please try again', 'danger');
     }
   }

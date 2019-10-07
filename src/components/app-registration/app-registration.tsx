@@ -17,6 +17,7 @@ export class AppRegistration {
     let validated = true;
     [this.first_name, this.last_name, this.email, this.password].forEach((element) => {
       if(!element.value || element.value.trim().length === 0) {
+        console.log(element, 'is invalid!');
         validated = false;
       }
     });
@@ -26,6 +27,8 @@ export class AppRegistration {
       return;
     }
 
+    const loading = await AppRoot.showLoading('Loading...');
+
     try {
       const response = await new UserHttpService().post({
         first_name: this.first_name.value,
@@ -34,12 +37,15 @@ export class AppRegistration {
         password_digest: this.password.value
       });
       if(!response || !response.id) {
+        await loading.dismiss();
         await AppRoot.showMessage(
           `Error: ${response.error || 'please try again'}`, 'danger');
         return;
       }
+      await loading.dismiss();
       await AppHome.login(this.email.value, this.password.value, response);
     } catch(err) {
+      await loading.dismiss();
       await AppRoot.showMessage('Error: please try again', 'danger');
       return;
     }

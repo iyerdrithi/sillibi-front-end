@@ -18,6 +18,7 @@ export class AppRegistration {
     [this.first_name, this.last_name, this.email, this.password].forEach((element) => {
       if(!element.value || element.value.trim().length === 0) {
         validated = false;
+        debugger;
       }
     });
 

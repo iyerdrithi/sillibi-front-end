@@ -2,6 +2,7 @@ import {Component, h} from '@stencil/core';
 import {SessionService} from "../../services/session.service";
 import {UserHttpService} from "../../http_services/user.service";
 import {AppRoot} from "../app-root/app-root";
+import {CrudHttpService} from "../../http_services/crud.service";
 
 @Component({
   tag: 'app-home',
@@ -32,7 +33,7 @@ export class AppHome {
       form_data.append("email", email);
       form_data.append("password", password);
       form_data.append("grant_type", "password");
-      const response = await fetch('http://localhost:3000/oauth/token', {
+      const response = await fetch(`${CrudHttpService.BASE_URL}/oauth/token`, {
         method: 'POST',
         body: form_data
       });

@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@ionic/core": "^4.10.0",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "@stencil/core": "^1.5.4"
